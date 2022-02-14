@@ -6,12 +6,15 @@
 class Card
 {
 public:
+    //新建卡
     Card(Person *owner, std::string Card_ID, std::string password);
-
+    //获取是否有效
     bool is_valid();
+    //挂失
     bool report_lost();
+    //解挂
     bool remove_lost();
-
+    //获取基本信息
     std::string get_card_ID();
     Person *get_owner();
 

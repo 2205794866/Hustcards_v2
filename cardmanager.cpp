@@ -2,13 +2,17 @@
 
 
 CardManager::CardManager()
+//初始化
 {
+    
     this->start_ID = "12346";
     this->nums = 0;
 }
 
 int CardManager::get_check_code(std::string ID)
+//获取校验码
 {
+    
     int sum;
     for(int i = 0; i<6; i++)
     {
@@ -31,12 +35,15 @@ std::string CardManager::get_card_ID()
 
 bool CardManager::open_account(std::string stu_ID, std::string name)
 {
+    //查找stu_ID是否存在
     std::unordered_map<std::string, Person *>::iterator iter = Map_IDtoPerson.find(stu_ID);
     if(iter != Map_IDtoPerson.end())
     {
         return false;
     }
+    //新建账户
     Person *one = new Person(stu_ID, name);
+    //将账户纳入管理
     this->personlist.push_back(one);
     Map_IDtoPerson.insert(std::make_pair(stu_ID, one));
     return true;
@@ -44,6 +51,7 @@ bool CardManager::open_account(std::string stu_ID, std::string name)
 
 bool CardManager::issue_card()
 {
+    //对符合条件账户发卡
     for(int i = 0; i<this->personlist.size(); i++)
     {
         if(personlist[i]->get_cardlist()->size() == 0)
