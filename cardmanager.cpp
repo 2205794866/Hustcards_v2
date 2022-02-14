@@ -65,3 +65,28 @@ bool CardManager::issue_card()
     }
     return true;
 }
+
+
+bool CardManager::reissue_card(Person *one)
+{
+    //挂失最新卡
+    one->get_valid_one()->report_lost();
+    //获取卡号
+    std::string card_ID = get_card_ID();
+    Card *newone = new Card(one, card_ID, "8888");
+    //
+    one->add_card(newone);
+    this->cardlist.push_back(newone);
+    this->Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
+    return true;
+}
+
+bool CardManager::report_lost(Card *one)
+{
+    return one->report_lost();
+}
+
+bool CardManager::remove_lost(Card *one)
+{
+    return one->remove_lost();
+}

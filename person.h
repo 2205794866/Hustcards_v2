@@ -17,6 +17,8 @@ public:
     std::vector<Card*> * get_cardlist();
     //获取有效卡
     Card *get_valid_one();
+
+    bool set_valid_one(Card *one);
     //新建卡
     bool Person::add_card(Card *one);
     //获取余额

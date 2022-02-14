@@ -15,6 +15,7 @@ private:
     std::string get_card_ID();
 
 public:
+    //初始化
     CardManager();
     std::vector<Card *> cardlist;
     std::vector<Person *> personlist;

@@ -7,7 +7,7 @@ class Card
 {
 public:
     //新建卡
-    Card(Person *owner, std::string Card_ID, std::string password);
+    Card(Person *owner, std::string Card_ID, std::string password = "8888");
     //获取是否有效
     bool is_valid();
     //挂失

@@ -48,6 +48,10 @@ bool Person::add_card(Card *one)
     return true;
 }
 
+bool Person::set_valid_one(Card *one)
+{
+    
+}
 
 
 bool Person::add_money(int x)

@@ -1,6 +1,6 @@
 #include "card.h"
 
-Card::Card(Person *owner, std::string card_ID, std::string password)
+Card::Card(Person *owner, std::string card_ID, std::string password = "8888")
 {
     this->owner = owner;
     this->card_ID = card_ID;
