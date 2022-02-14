@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     //初始化
     this->setWindowTitle("HUSTCards");
-
+    this->CM = new CardManager;
 
     //界面信息
 
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //menu bar
     ui->search_menu->addAction(ui->search_person);
+    ui->all_menu->addAction(ui->Input_all);
 
 
 

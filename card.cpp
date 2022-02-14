@@ -1,6 +1,6 @@
 #include "card.h"
 
-Card::Card(Person *owner, std::string card_ID, std::string password = "8888")
+Card::Card(Person *owner, std::string card_ID, std::string password)
 {
     this->owner = owner;
     this->card_ID = card_ID;
@@ -17,11 +17,6 @@ bool Card::is_valid()
 std::string Card::get_card_ID()
 {
     return this->card_ID;
-}
-
-Person *Card::get_owner()
-{
-    return this->owner;
 }
 
 bool Card::report_lost()

@@ -33,9 +33,11 @@ public:
     //解挂
     bool remove_lost(Card *);
     //销户
-    bool remove_lost(Person *);
+    bool cancel_account(Person *);
+    //恢复
+    bool recover_account(Person *);
     //充值
-    bool add_money(int x);
+    bool add_money(Person *one, int x);
 
 
 

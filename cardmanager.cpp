@@ -12,8 +12,7 @@ CardManager::CardManager()
 int CardManager::get_check_code(std::string ID)
 //获取校验码
 {
-    
-    int sum;
+    int sum = 0;
     for(int i = 0; i<6; i++)
     {
         sum += ID[i] - '0';
@@ -29,8 +28,6 @@ std::string CardManager::get_card_ID()
     stu_ID += std::to_string(num);
     stu_ID += std::to_string(get_check_code(stu_ID));
     return stu_ID;
-
-
 }
 
 bool CardManager::open_account(std::string stu_ID, std::string name)
@@ -54,13 +51,15 @@ bool CardManager::issue_card()
     //对符合条件账户发卡
     for(int i = 0; i<this->personlist.size(); i++)
     {
-        if(personlist[i]->get_cardlist()->size() == 0)
+        Person *one = personlist[i];
+        if(one->cardlist->size() == 0)
         {
             std::string card_ID = get_card_ID();
             Card* newone = new Card(personlist[i], card_ID, "8888");
             this->cardlist.push_back(newone);
             Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
-            personlist[i]->add_card(newone);
+            one->cardlist->push_back(newone);
+            one->valid_one = newone; 
         }
     }
     return true;
@@ -70,12 +69,13 @@ bool CardManager::issue_card()
 bool CardManager::reissue_card(Person *one)
 {
     //挂失最新卡
-    one->get_valid_one()->report_lost();
+    one->valid_one->report_lost();
     //获取卡号
     std::string card_ID = get_card_ID();
     Card *newone = new Card(one, card_ID, "8888");
     //
-    one->add_card(newone);
+    one->cardlist->push_back(newone);
+    one->valid_one = newone;
     this->cardlist.push_back(newone);
     this->Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
     return true;
@@ -89,4 +89,14 @@ bool CardManager::report_lost(Card *one)
 bool CardManager::remove_lost(Card *one)
 {
     return one->remove_lost();
+}
+
+bool CardManager::cancel_account(Person *one)
+{
+    return one->cancel_account();
+}
+
+bool CardManager::recover_account(Person *one)
+{
+    return one->recover_account();
 }

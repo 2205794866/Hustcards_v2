@@ -26,33 +26,32 @@ int Person::get_money()
     return this->money;
 }
 
-std::vector<Card *>* Person::get_cardlist()
-{
-    return this->cardlist;
-}
-
 bool Person::is_valid()
 {
     return this->valid;
 }
 
-Card *Person::get_valid_one()
+bool Person::cancel_account()
 {
-    return this->valid_one;
+    if(this->valid == true)
+    {
+        this->valid = false;
+        return true;
+    }
+    else
+        return false;
 }
 
-bool Person::add_card(Card *one)
+bool Person::recover_account()
 {
-    this->cardlist->push_back(one);
-    this->valid_one = one;
-    return true;
+    if(this->valid == false)
+    {
+        this->valid = true;
+        return true;
+    }
+    else
+        return false;
 }
-
-bool Person::set_valid_one(Card *one)
-{
-    
-}
-
 
 bool Person::add_money(int x)
 {

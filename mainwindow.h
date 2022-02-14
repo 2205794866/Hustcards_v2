@@ -11,6 +11,9 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QToolBar>
+#include "std.h"
+#include "cardmanager.h"
+
 QT_BEGIN_NAMESPACE
 
 
@@ -30,6 +33,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    CardManager *CM;
+
     //QTableView model
     QStandardItemModel *stu_model = new QStandardItemModel();
 

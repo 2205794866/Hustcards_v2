@@ -99,14 +99,25 @@
      <string>卡操作</string>
     </property>
    </widget>
+   <widget class="QMenu" name="all_menu">
+    <property name="title">
+     <string>批量操作</string>
+    </property>
+   </widget>
    <addaction name="search_menu"/>
    <addaction name="stu_menu"/>
    <addaction name="card_menu"/>
+   <addaction name="all_menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="search_person">
    <property name="text">
     <string>查找学生</string>
+   </property>
+  </action>
+  <action name="Input_all">
+   <property name="text">
+    <string>批量导入</string>
    </property>
   </action>
  </widget>
