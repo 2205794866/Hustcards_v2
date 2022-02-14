@@ -11,19 +11,25 @@ CONFIG += c++11
 SOURCES += \
     card.cpp \
     cardmanager.cpp \
+    fail.cpp \
     main.cpp \
     mainwindow.cpp \
-    person.cpp
+    person.cpp \
+    succeed.cpp
 
 HEADERS += \
     card.h \
     cardmanager.h \
+    fail.h \
     mainwindow.h \
     person.h \
-    std.h
+    std.h \
+    succeed.h
 
 FORMS += \
-    mainwindow.ui
+    fail.ui \
+    mainwindow.ui \
+    succeed.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
