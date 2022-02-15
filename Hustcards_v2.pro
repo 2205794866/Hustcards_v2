@@ -15,6 +15,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     person.cpp \
+    search_stu.cpp \
+    stu_info.cpp \
     succeed.cpp
 
 HEADERS += \
@@ -23,12 +25,16 @@ HEADERS += \
     fail.h \
     mainwindow.h \
     person.h \
+    search_stu.h \
     std.h \
+    stu_info.h \
     succeed.h
 
 FORMS += \
     fail.ui \
     mainwindow.ui \
+    search_stu.ui \
+    stu_info.ui \
     succeed.ui
 
 # Default rules for deployment.

@@ -47,9 +47,72 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_search_person_triggered()
+void MainWindow::insert_data(unsigned int row_num, std::string stu_ID, std::string name, int money)
 {
+    QString QrowNum = QString::asprintf("%d", row_num);
+    QString Qstu_ID = QString::fromStdString(stu_ID);
+    QString Qname = QString::fromStdString(name);
+    QString Qmoney = QString::asprintf("%d.%02d", money/100, money%100);
+    stu_model->setItem(row_num, 0, new QStandardItem(QrowNum));
+    stu_model->setItem(row_num, 1, new QStandardItem(Qstu_ID));
+    stu_model->setItem(row_num, 2, new QStandardItem(Qname));
+    stu_model->setItem(row_num, 3, new QStandardItem(Qmoney));
+}
 
+
+
+
+
+void MainWindow::on_show_data_clicked()
+{
+    for(unsigned int i = 0; i<CM->personlist.size(); i++)
+    {
+        Person *one = CM->personlist[i];
+        this->insert_data(i, one->get_stu_ID(), one->get_name(), one->get_money());
+    }
+}
+
+
+void MainWindow::on_Input_all_triggered()
+{
+    std::ifstream afile("d:\\Study\\Project\\Hustcards_v2\\Data\\v2\\kh001.txt");
+    char buff[255];
+    std::string str;
+    afile.getline(buff, 255);
+    str = buff;
+    if(str == "KH")
+    {
+        while (!afile.eof())
+        {
+            if(afile.getline(buff, 255).good())
+            {
+                str = buff;
+                str.pop_back();
+                std::string stu_ID, name;
+                stu_ID = str.substr(0, 10);
+                name = str.substr(11);
+                this->CM->open_account(stu_ID, name);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+}
+
+
+void MainWindow::on_clear_data_clicked()
+{
+    stu_model->removeRows(0, stu_model->rowCount());
+}
+
+
+void MainWindow::on_stus_info_doubleClicked(const QModelIndex &index)
+{
+    std::string stu_ID = stu_model->item(index.row(), 1)->text().toStdString();
+    Person *one = this->CM->Map_IDtoPerson.find(stu_ID)->second;
+    stu_info *ui_stu_info = new stu_info(this->CM,one,this);
+    ui_stu_info->show();
 }
 
