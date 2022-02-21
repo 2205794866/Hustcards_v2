@@ -24,6 +24,7 @@ bool Card::report_lost()
     if(this->valid == true)
     {
         this->valid = false;
+        this->owner->valid_one = nullptr;
         return true;
     }
     return false; 

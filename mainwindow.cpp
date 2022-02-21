@@ -36,10 +36,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     //menu bar
     ui->search_menu->addAction(ui->search_person);
+
+
     ui->all_menu->addAction(ui->Input_all);
+    ui->all_menu->addAction(ui->issue_all_card);
 
 
+    ui->stu_menu->addAction(ui->open_account);
+    ui->stu_menu->addAction(ui->remove_person);
+    ui->stu_menu->addAction(ui->add_money);
 
+    ui->card_menu->addAction(ui->issue_card);
+    ui->card_menu->addAction(ui->report_lost);
+    ui->card_menu->addAction(ui->remove_lost);
 }
 
 MainWindow::~MainWindow()
@@ -68,6 +77,7 @@ void MainWindow::on_show_data_clicked()
     for(unsigned int i = 0; i<CM->personlist.size(); i++)
     {
         Person *one = CM->personlist[i];
+        if(one->is_valid() == true)
         this->insert_data(i, one->get_stu_ID(), one->get_name(), one->get_money());
     }
 }
@@ -75,7 +85,7 @@ void MainWindow::on_show_data_clicked()
 
 void MainWindow::on_Input_all_triggered()
 {
-    std::ifstream afile("d:\\Study\\Project\\Hustcards_v2\\Data\\v2\\kh001.txt");
+    std::ifstream afile("d:\\Study\\Project\\Hustcards_v2\\Data\\v3\\kh001.txt");
     char buff[255];
     std::string str;
     afile.getline(buff, 255);
@@ -114,5 +124,55 @@ void MainWindow::on_stus_info_doubleClicked(const QModelIndex &index)
     Person *one = this->CM->Map_IDtoPerson.find(stu_ID)->second;
     stu_info *ui_stu_info = new stu_info(this->CM,one,this);
     ui_stu_info->show();
+}
+
+
+
+void MainWindow::on_open_account_triggered()
+{
+    new_stu *ui_new_stu = new new_stu(this->CM, this);
+    ui_new_stu->show();
+}
+
+
+
+
+void MainWindow::on_issue_all_card_triggered()
+{
+    CM->issue_card();
+}
+
+
+void MainWindow::on_remove_person_triggered()
+{
+    search_stu *ui_search_stu = new search_stu(this->CM, 0, this);
+    ui_search_stu->show();
+}
+
+void MainWindow::on_issue_card_triggered()
+{
+    search_stu *ui_search_stu = new search_stu(this->CM, 1, this);
+    ui_search_stu->show();
+}
+
+
+void MainWindow::on_report_lost_triggered()
+{
+    search_stu *ui_search_stu = new search_stu(this->CM, 2, this);
+    ui_search_stu->show();
+}
+
+
+void MainWindow::on_remove_lost_triggered()
+{
+    search_stu *ui_search_stu = new search_stu(this->CM, 3, this);
+    ui_search_stu->show();
+}
+
+
+void MainWindow::on_add_money_triggered()
+{
+    add_money *ui_add_money = new add_money(this->CM, this);
+    ui_add_money->show();
 }
 

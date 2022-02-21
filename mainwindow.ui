@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1037</width>
-    <height>644</height>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -104,10 +104,16 @@
      <string>批量操作</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>日志</string>
+    </property>
+   </widget>
    <addaction name="search_menu"/>
    <addaction name="stu_menu"/>
    <addaction name="card_menu"/>
    <addaction name="all_menu"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="search_person">
@@ -118,6 +124,44 @@
   <action name="Input_all">
    <property name="text">
     <string>批量导入</string>
+   </property>
+  </action>
+  <action name="issue_all_card">
+   <property name="text">
+    <string>批量发卡</string>
+   </property>
+   <property name="toolTip">
+    <string>为符合条件的账户发卡</string>
+   </property>
+  </action>
+  <action name="open_account">
+   <property name="text">
+    <string>开户</string>
+   </property>
+  </action>
+  <action name="remove_person">
+   <property name="text">
+    <string>销户</string>
+   </property>
+  </action>
+  <action name="report_lost">
+   <property name="text">
+    <string>挂失</string>
+   </property>
+  </action>
+  <action name="remove_lost">
+   <property name="text">
+    <string>解挂</string>
+   </property>
+  </action>
+  <action name="issue_card">
+   <property name="text">
+    <string>发卡</string>
+   </property>
+  </action>
+  <action name="add_money">
+   <property name="text">
+    <string>充值</string>
    </property>
   </action>
  </widget>

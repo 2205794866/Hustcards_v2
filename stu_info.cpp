@@ -15,11 +15,18 @@ stu_info::stu_info(CardManager *CM, Person *one, QWidget *parent) :
     ui->name->setText(QString::fromStdString(one->get_name()));
     ui->stu_ID->setText(QString::fromStdString(one->get_stu_ID()));
 
-    ui->card_list->setModel(card_model);
 
+
+    ui->card_list->setModel(card_model);
+    ui->card_list->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->card_list->setSelectionMode( QAbstractItemView::SingleSelection);
+
+
+    //card list
     card_model->setHorizontalHeaderItem(0, new QStandardItem(tr("卡号")));
     for(unsigned int i = 0; i<one->cardlist->size(); i++)
     {
+//        std::cout << i << std::endl;
         Card *new_one = (*one->cardlist)[i];
         QStandardItem *item = new QStandardItem(QString::fromStdString(new_one->get_card_ID()));
         if(new_one->is_valid() == true)
@@ -28,7 +35,8 @@ stu_info::stu_info(CardManager *CM, Person *one, QWidget *parent) :
         }
         else
         {
-            item->setBackground(Qt::black);
+//            std::cout << 1 << std::endl;
+            item->setBackground(Qt::red);
         }
         card_model->setItem(i, item);
     }

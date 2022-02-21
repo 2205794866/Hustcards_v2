@@ -5,8 +5,8 @@
 #include "stu_info.h"
 #include "fail.h"
 #include "search_stu.h"
-
-
+#include "new_stu.h"
+#include "add_money.h"
 
 
 // QT headers
@@ -18,7 +18,10 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QToolBar>
-#include "stu_info.h"
+
+
+
+
 
 #include "std.h"
 #include "cardmanager.h"
@@ -48,6 +51,21 @@ private slots:
     void on_clear_data_clicked();
 
     void on_stus_info_doubleClicked(const QModelIndex &index);
+
+
+    void on_open_account_triggered();
+
+    void on_remove_person_triggered();
+
+    void on_issue_all_card_triggered();
+
+    void on_report_lost_triggered();
+
+    void on_issue_card_triggered();
+
+    void on_remove_lost_triggered();
+
+    void on_add_money_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -27,6 +27,7 @@ std::string CardManager::get_card_ID()
     int num = std::stoi(this->start_ID) + this->nums;
     stu_ID += std::to_string(num);
     stu_ID += std::to_string(get_check_code(stu_ID));
+    this->nums++;
     return stu_ID;
 }
 
@@ -49,7 +50,7 @@ bool CardManager::open_account(std::string stu_ID, std::string name)
 bool CardManager::issue_card()
 {
     //对符合条件账户发卡
-    for(int i = 0; i<this->personlist.size(); i++)
+    for(unsigned int i = 0; i<this->personlist.size(); i++)
     {
         Person *one = personlist[i];
         if(one->cardlist->size() == 0)
@@ -69,7 +70,8 @@ bool CardManager::issue_card()
 bool CardManager::reissue_card(Person *one)
 {
     //挂失最新卡
-    one->valid_one->report_lost();
+    if(one->valid_one != nullptr)
+        one->valid_one->report_lost();
     //获取卡号
     std::string card_ID = get_card_ID();
     Card *newone = new Card(one, card_ID, "8888");
@@ -78,6 +80,7 @@ bool CardManager::reissue_card(Person *one)
     one->valid_one = newone;
     this->cardlist.push_back(newone);
     this->Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
+//    std::cout << "succeed" << std::endl;
     return true;
 }
 
