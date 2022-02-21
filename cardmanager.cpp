@@ -103,3 +103,8 @@ bool CardManager::recover_account(Person *one)
 {
     return one->recover_account();
 }
+
+bool CardManager::add_money(Person *one, int x)
+{
+    return one->add_money(x);
+}

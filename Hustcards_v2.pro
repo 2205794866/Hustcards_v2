@@ -13,6 +13,7 @@ SOURCES += \
     card.cpp \
     cardmanager.cpp \
     fail.cpp \
+    logger.cpp \
     main.cpp \
     mainwindow.cpp \
     new_stu.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     card.h \
     cardmanager.h \
     fail.h \
+    logger.h \
     mainwindow.h \
     new_stu.h \
     person.h \

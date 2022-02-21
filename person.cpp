@@ -55,7 +55,7 @@ bool Person::recover_account()
 
 bool Person::add_money(int x)
 {
-    int sum = this->money + x;
+    int sum = this->money + 100 * x ;
     if(sum < 0 || sum > 99999)
     {
         return false;
