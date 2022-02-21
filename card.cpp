@@ -6,7 +6,6 @@ Card::Card(Person *owner, std::string card_ID, std::string password)
     this->card_ID = card_ID;
     this->password = password;
     this->valid = true;
-    
 }
 
 bool Card::is_valid()
@@ -21,21 +20,21 @@ std::string Card::get_card_ID()
 
 bool Card::report_lost()
 {
-    if(this->valid == true)
+    if (this->valid == true)
     {
         this->valid = false;
         this->owner->valid_one = nullptr;
         return true;
     }
-    return false; 
+    return false;
 }
 
 bool Card::remove_lost()
 {
-    if(this->valid == false)
+    if (this->valid == false)
     {
         this->valid = true;
         return true;
     }
-    return false;  
+    return false;
 }
