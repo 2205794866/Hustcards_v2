@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     //初始化
     this->setWindowTitle("HUSTCards");
     this->CM = new CardManager;
-
+    this->CT = new canteen(this->CM);
     //界面信息
 
     stu_model = new QStandardItemModel;
@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->card_menu->addAction(ui->report_lost);
     ui->card_menu->addAction(ui->remove_lost);
 
+    ui->canteen_menu->addAction(ui->consume);
     ui->log_menu->addAction(ui->open_log);
 }
 
@@ -135,8 +136,8 @@ void MainWindow::insert_consume_record(consume_record *record)
     consume_model->setItem(row_num, 0, new QStandardItem(Qtime));
     consume_model->setItem(row_num, 1, new QStandardItem(Qcanteen_ID));
     consume_model->setItem(row_num, 2, new QStandardItem(Qcard_ID));
-    consume_model->setItem(row_num, 4, new QStandardItem(Qmoney));
-    consume_model->setItem(row_num, 5, new QStandardItem(Qflag));
+    consume_model->setItem(row_num, 3, new QStandardItem(Qmoney));
+    consume_model->setItem(row_num, 4, new QStandardItem(Qflag));
 }
 
 
@@ -257,5 +258,12 @@ void MainWindow::on_open_log_triggered()
     {
         insert_consume_record(*iter);
     }
+}
+
+
+void MainWindow::on_consume_triggered()
+{
+    consume *ui_consume = new consume(this->CT, this);
+    ui_consume->show();
 }
 

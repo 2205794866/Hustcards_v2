@@ -186,9 +186,9 @@
    <addaction name="search_menu"/>
    <addaction name="stu_menu"/>
    <addaction name="card_menu"/>
-   <addaction name="all_menu"/>
    <addaction name="canteen_menu"/>
    <addaction name="log_menu"/>
+   <addaction name="all_menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="search_person">
@@ -242,6 +242,11 @@
   <action name="open_log">
    <property name="text">
     <string>载入日志</string>
+   </property>
+  </action>
+  <action name="consume">
+   <property name="text">
+    <string>消费</string>
    </property>
   </action>
  </widget>

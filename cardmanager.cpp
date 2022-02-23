@@ -118,6 +118,18 @@ bool CardManager::recover_account(Person *one)
 bool CardManager::add_money(Person *one, int x)
 {
     bool flag = one->add_money(x);
-    logger.write_operation_record(new operation_record(logger.time, one->get_name(),one->get_stu_ID(), "充值" + std::to_string(x) , flag));
+    logger.write_operation_record(new operation_record(logger.time, one->get_name(),one->get_stu_ID(), "充值" + std::to_string(x/100) , flag));
+    return flag;
+}
+
+bool CardManager::consume(std::string card_ID, int x)
+{
+    auto iter = this->Map_CIDtoCard.find(card_ID);
+    if(iter == this->Map_CIDtoCard.end())
+    {
+        return false;
+    }
+    Person *one = iter->second->owner;
+    bool flag = one->consume(x);
     return flag;
 }

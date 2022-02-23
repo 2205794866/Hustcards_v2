@@ -3,6 +3,10 @@
 #include "std.h"
 #include "person.h"
 
+
+
+
+
 class Card
 {
 public:

@@ -40,6 +40,8 @@ public:
     bool recover_account(Person *);
     //充值
     bool add_money(Person *one, int x);
+    //消费
+    bool consume(std::string card_ID, int x);
 
 
 

@@ -10,8 +10,10 @@ CONFIG += c++11
 
 SOURCES += \
     add_money.cpp \
+    canteen.cpp \
     card.cpp \
     cardmanager.cpp \
+    consume.cpp \
     fail.cpp \
     logger.cpp \
     main.cpp \
@@ -25,8 +27,10 @@ SOURCES += \
 
 HEADERS += \
     add_money.h \
+    canteen.h \
     card.h \
     cardmanager.h \
+    consume.h \
     fail.h \
     logger.h \
     mainwindow.h \
@@ -40,6 +44,7 @@ HEADERS += \
 
 FORMS += \
     add_money.ui \
+    consume.ui \
     fail.ui \
     mainwindow.ui \
     new_stu.ui \

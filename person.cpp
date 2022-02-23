@@ -55,7 +55,7 @@ bool Person::recover_account()
 
 bool Person::add_money(int x)
 {
-    int sum = this->money + 100 * x ;
+    int sum = this->money + x ;
     if(sum < 0 || sum > 99999)
     {
         return false;
@@ -66,3 +66,20 @@ bool Person::add_money(int x)
         return true;
     }
 }
+
+bool Person::consume(int x)
+{
+
+    int sum = this->money - x;
+    std::cout << sum << std::endl;
+    if(sum < 0 || sum > 99999)
+    {
+        return false;
+    }
+    else
+    {
+        this->money = sum;
+        return true;
+    }
+}
+

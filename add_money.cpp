@@ -20,7 +20,7 @@ add_money::~add_money()
 void add_money::on_buttonBox_accepted()
 {
     std::string stu_ID = ui->stu_ID->toPlainText().toStdString();
-    int money = ui->money->toPlainText().toInt();
+    int money = ui->money->toPlainText().toInt() * 100;
 //    std::cout << money <<std::endl;
     auto iter = this->CM->Map_IDtoPerson.find(stu_ID);
     if(iter == this->CM->Map_IDtoPerson.end())

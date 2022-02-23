@@ -8,7 +8,8 @@
 #include "new_stu.h"
 #include "add_money.h"
 #include "logger.h"
-#include "log.h"
+#include "canteen.h"
+#include "consume.h"
 
 // QT headers
 #include <QMainWindow>
@@ -70,10 +71,12 @@ private slots:
 
     void on_open_log_triggered();
 
+    void on_consume_triggered();
+
 private:
     Ui::MainWindow *ui;
     CardManager *CM;
-
+    canteen *CT;
     //QTableView model
     QStandardItemModel *stu_model;
     QStandardItemModel *operation_model;

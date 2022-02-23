@@ -26,6 +26,8 @@ public:
     bool is_valid();
     //充值
     bool add_money(int x);
+    //消费
+    bool consume(int x);
 private:
     std::string name;
     std::string stu_ID;
