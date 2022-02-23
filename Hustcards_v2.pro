@@ -19,11 +19,13 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     new_stu.cpp \
+    operation.cpp \
     person.cpp \
     search_stu.cpp \
     stu_info.cpp \
     stu_info_func.cpp \
-    succeed.cpp
+    succeed.cpp \
+    time.cpp
 
 HEADERS += \
     add_money.h \
@@ -35,12 +37,14 @@ HEADERS += \
     logger.h \
     mainwindow.h \
     new_stu.h \
+    operation.h \
     person.h \
     search_stu.h \
     std.h \
     stu_info.h \
     stu_info_func.h \
-    succeed.h
+    succeed.h \
+    time.h
 
 FORMS += \
     add_money.ui \

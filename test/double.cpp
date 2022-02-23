@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     double a = 1.12345;
-    string str = to_string(a, 2);
+    string str = to_string(a);
     cout << str <<endl;
     return 0;
 }

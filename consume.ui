@@ -78,6 +78,12 @@
       <property name="maximum">
        <double>999.000000000000000</double>
       </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+      </property>
      </widget>
     </item>
    </layout>
