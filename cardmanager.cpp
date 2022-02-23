@@ -37,6 +37,7 @@ bool CardManager::open_account(std::string stu_ID, std::string name)
     std::unordered_map<std::string, Person *>::iterator iter = Map_IDtoPerson.find(stu_ID);
     if(iter != Map_IDtoPerson.end())
     {
+        logger.write_operation_record(new operation_record(logger.time, name, stu_ID, "开户", false));
         return false;
     }
     //新建账户
@@ -44,6 +45,7 @@ bool CardManager::open_account(std::string stu_ID, std::string name)
     //将账户纳入管理
     this->personlist.push_back(one);
     Map_IDtoPerson.insert(std::make_pair(stu_ID, one));
+    logger.write_operation_record(new operation_record(logger.time, name, stu_ID, "开户", true));
     return true;
 }
 
@@ -60,7 +62,8 @@ bool CardManager::issue_card()
             this->cardlist.push_back(newone);
             Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
             one->cardlist->push_back(newone);
-            one->valid_one = newone; 
+            one->valid_one = newone;
+            logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "发卡", true));
         }
     }
     return true;
@@ -80,31 +83,41 @@ bool CardManager::reissue_card(Person *one)
     one->valid_one = newone;
     this->cardlist.push_back(newone);
     this->Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
-//    std::cout << "succeed" << std::endl;
+    logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "补卡", true));
     return true;
 }
 
 bool CardManager::report_lost(Card *one)
 {
-    return one->report_lost();
+    bool flag = one->report_lost();
+    logger.write_operation_record(new operation_record(logger.time,one->owner->get_name(), one->owner->get_stu_ID(), "挂失", flag));
+    return flag;
 }
 
 bool CardManager::remove_lost(Card *one)
 {
-    return one->remove_lost();
+    bool flag = one->remove_lost();
+    logger.write_operation_record(new operation_record(logger.time,one->owner->get_name(), one->owner->get_stu_ID(), "解挂", flag));
+    return flag;
 }
 
 bool CardManager::cancel_account(Person *one)
 {
-    return one->cancel_account();
+    bool flag = one->cancel_account();
+    logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "开户", flag));
+    return flag;
 }
 
 bool CardManager::recover_account(Person *one)
 {
-    return one->recover_account();
+    bool flag = one->recover_account();
+    logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "开户", flag));
+    return flag;
 }
 
 bool CardManager::add_money(Person *one, int x)
 {
-    return one->add_money(x);
+    bool flag = one->add_money(x);
+    logger.write_operation_record(new operation_record(logger.time, one->get_name(),one->get_stu_ID(), "充值" + std::to_string(x) , flag));
+    return flag;
 }

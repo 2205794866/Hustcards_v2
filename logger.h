@@ -7,10 +7,11 @@ typedef  struct _operation_record
 {
     std::string time,stu_ID, name, operation;
     bool succeed;
-    _operation_record(std::string time, std::string name, std::string operation, bool succeed)
+    _operation_record(std::string time, std::string name, std::string stu_ID, std::string operation, bool succeed)
     {
         this->time = time;
         this->name = name;
+        this->stu_ID = stu_ID;
         this->operation = operation;
         this->succeed = succeed;
     }
@@ -32,15 +33,15 @@ typedef  struct _consume_record
 } consume_record;
 
 
-class logger
+class Logger
 {
 public:
-    logger();
+    Logger();
     bool write_operation_record(operation_record *);
     bool write_consume_record(consume_record *);
-    std::queue<operation_record*> operation_list;
-    std::queue<consume_record *> consume_list;
-
+    std::deque<operation_record*> operation_list;
+    std::deque<consume_record *> consume_list;
+    std::string time;
 
 private:
 

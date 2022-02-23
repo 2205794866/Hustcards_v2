@@ -7,7 +7,8 @@
 #include "search_stu.h"
 #include "new_stu.h"
 #include "add_money.h"
-
+#include "logger.h"
+#include "log.h"
 
 // QT headers
 #include <QMainWindow>
@@ -67,16 +68,22 @@ private slots:
 
     void on_add_money_triggered();
 
+    void on_open_log_triggered();
+
 private:
     Ui::MainWindow *ui;
     CardManager *CM;
 
     //QTableView model
-    QStandardItemModel *stu_model = new QStandardItemModel();
-
+    QStandardItemModel *stu_model;
+    QStandardItemModel *operation_model;
+    QStandardItemModel *consume_model;
 
 
     //func
     void insert_data(unsigned int row_num, std::string stu_ID, std::string name, int money);
+
+    void insert_operation_record(operation_record *);
+    void insert_consume_record(consume_record *);
 };
 #endif // MAINWINDOW_H

@@ -3,7 +3,9 @@
 #include "std.h"
 #include "person.h"
 #include "card.h"
+#include "logger.h"
 
+extern Logger logger;
 
 class CardManager
 {
