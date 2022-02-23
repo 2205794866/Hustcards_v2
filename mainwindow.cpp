@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->all_menu->addAction(ui->Input_all);
     ui->all_menu->addAction(ui->issue_all_card);
-
+    ui->all_menu->addAction(ui->operate_all);
 
     ui->stu_menu->addAction(ui->open_account);
     ui->stu_menu->addAction(ui->remove_person);
@@ -267,9 +267,76 @@ void MainWindow::on_consume_triggered()
     ui_consume->show();
 }
 
+Operation* MainWindow::get_operation(std::string str)
+{
+    std::string tm, func, stu_ID, name, card_ID;
+    int func_num, money;
+    Operation *one = nullptr;
+    tm = str.substr(0, str.find(","));
+    str = str.substr(str.find(",") + 1);
+    func = str.substr(0, str.find(","));
+    str = str.substr(str.find(",") + 1);
+    if(func == "挂失")
+        func_num = 2;
+    else if(func == "解挂")
+        func_num = 3;
+    else if(func == "充值")
+        func_num = 4;
+    else
+        func_num = 0;
+    switch (func_num) {
+    case 2:
+    case 3:
+        stu_ID = str.substr(0, str.find(";"));
+        one = new Operation(tm,stu_ID, func_num);
+        break;
+    case 4:
+        stu_ID = str.substr(0, str.find(","));
+        str = str.substr(str.find(",")+1);
+        money = std::stoi(str.substr(0, str.find(";"))) * 100;
+        one = new Operation(tm, stu_ID, money, func_num);
+        break;
+    }
+    std::cout << tm << stu_ID << func_num << std::endl;
+    return one;
+
+}
+
 
 void MainWindow::on_operate_all_triggered()
 {
+    std::vector<Operation *> ans;
+    std::vector<std::vector<Operation *>> data;
+    //读入数据
+    char buff[255];
+    std::string str;
+    std::ifstream fp;
+    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v3\\cz002.txt");
+    std::cout << 0<< std::endl;
+    fp.getline(buff, 255);
+    str = buff;
+    if(str == "CZ")
+    {
+        std::vector<Operation *> list;
+        while(!fp.eof())
+        {
+            if(fp.getline(buff, 255).good())
+            {
+                std::cout << 1<< std::endl;
+                str = buff;
+                list.push_back(get_operation(str));
+                break;
+            }
+            else
+            {
+                break;
+            }
+        }
+        data.push_back(list);
+    }
+    fp.close();
 
+
+    fp.open()
 }
 

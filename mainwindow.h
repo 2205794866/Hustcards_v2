@@ -11,7 +11,7 @@
 #include "canteen.h"
 #include "consume.h"
 #include "operation.h"
-#include "time.h"
+
 
 
 // QT headers
@@ -90,8 +90,8 @@ private:
 
     //func
     void insert_data(unsigned int row_num, std::string stu_ID, std::string name, int money);
-
     void insert_operation_record(operation_record *);
     void insert_consume_record(consume_record *);
+    Operation *get_operation(std::string);
 };
 #endif // MAINWINDOW_H
