@@ -24,8 +24,7 @@ SOURCES += \
     search_stu.cpp \
     stu_info.cpp \
     stu_info_func.cpp \
-    succeed.cpp \
-    time.cpp
+    succeed.cpp
 
 HEADERS += \
     add_money.h \
@@ -43,8 +42,7 @@ HEADERS += \
     std.h \
     stu_info.h \
     stu_info_func.h \
-    succeed.h \
-    time.h
+    succeed.h
 
 FORMS += \
     add_money.ui \
