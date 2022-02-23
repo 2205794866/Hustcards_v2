@@ -267,3 +267,9 @@ void MainWindow::on_consume_triggered()
     ui_consume->show();
 }
 
+
+void MainWindow::on_operate_all_triggered()
+{
+
+}
+

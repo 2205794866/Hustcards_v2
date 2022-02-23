@@ -10,6 +10,9 @@
 #include "logger.h"
 #include "canteen.h"
 #include "consume.h"
+#include "operation.h"
+#include "time.h"
+
 
 // QT headers
 #include <QMainWindow>
@@ -72,6 +75,8 @@ private slots:
     void on_open_log_triggered();
 
     void on_consume_triggered();
+
+    void on_operate_all_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -198,7 +198,7 @@
   </action>
   <action name="Input_all">
    <property name="text">
-    <string>批量导入</string>
+    <string>批量开户</string>
    </property>
   </action>
   <action name="issue_all_card">
@@ -247,6 +247,11 @@
   <action name="consume">
    <property name="text">
     <string>消费</string>
+   </property>
+  </action>
+  <action name="operate_all">
+   <property name="text">
+    <string>批量操作</string>
    </property>
   </action>
  </widget>
