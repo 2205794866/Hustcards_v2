@@ -7,14 +7,17 @@ class Card;
 class Person
 {
 public:
+    //有效卡
     Card *valid_one;
+    //卡表
     std::vector <Card *> *cardlist;
 
-    
+
     // 新建账户
     Person(std::string stu_ID, std::string name);
-    //获取基本信息
+    //获取姓名
     std::string get_name();
+    //获取学号
     std::string get_stu_ID();
     //获取余额
     int get_money();
@@ -29,9 +32,13 @@ public:
     //消费
     bool consume(int x);
 private:
+    //姓名
     std::string name;
+    //学号
     std::string stu_ID;
+    //是否有效
     bool valid;
+    //余额
     int money;
 };
 

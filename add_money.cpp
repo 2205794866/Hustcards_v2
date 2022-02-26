@@ -32,7 +32,7 @@ void add_money::on_buttonBox_accepted()
     else
     {
         Person *one = iter->second;
-        if(this->CM->add_money(one, money) == true)
+        if(this->CM->add_money(logger.time, one, money) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();

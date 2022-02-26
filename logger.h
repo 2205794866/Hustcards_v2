@@ -3,6 +3,7 @@
 #include "std.h"
 
 
+
 typedef  struct _operation_record
 {
     std::string time,stu_ID, name, operation;
@@ -39,11 +40,13 @@ public:
     Logger();
     bool write_operation_record(operation_record *);
     bool write_consume_record(consume_record *);
-    std::deque<operation_record*> operation_list;
-    std::deque<consume_record *> consume_list;
+    // std::deque<operation_record*> operation_list;
+    // std::deque<consume_record *> consume_list; 
     std::string time;
-
+    ~Logger();
 private:
+    //操作日志和消费日志文件
+    std::fstream afile, bfile;
 
 };
 

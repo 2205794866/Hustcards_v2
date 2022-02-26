@@ -68,7 +68,7 @@ void stu_info_func::on_buttonBox_accepted()
 {
     if(this->func_num == 0)
     {
-        if(this->CM->cancel_account(one) == true)
+        if(this->CM->cancel_account(logger.time, one) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();
@@ -81,7 +81,7 @@ void stu_info_func::on_buttonBox_accepted()
     }
     else if(this->func_num == 1)
     {
-        if(this->CM->reissue_card(one) == true)
+        if(this->CM->reissue_card(logger.time,one) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();
@@ -94,7 +94,7 @@ void stu_info_func::on_buttonBox_accepted()
     }
     else if(this->func_num == 2)
     {
-        if(this->CM->report_lost(one->valid_one) == true)
+        if(this->CM->report_lost(logger.time,one->valid_one) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();
@@ -108,7 +108,7 @@ void stu_info_func::on_buttonBox_accepted()
     else if(this->func_num == 3)
     {
         Card *card_one = *(one->cardlist->end() - 1);
-        if(card_one->is_valid() == false && this->CM->remove_lost(card_one) == true)
+        if(card_one->is_valid() == false && this->CM->remove_lost(logger.time,card_one) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();

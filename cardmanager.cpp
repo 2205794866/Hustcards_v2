@@ -20,116 +20,168 @@ int CardManager::get_check_code(std::string ID)
     return (9- sum%10);
 }
 
-
-std::string CardManager::get_card_ID()
+int CardManager::get_card_nums()
+//获取卡数
 {
-    std::string stu_ID = "3";
-    int num = std::stoi(this->start_ID) + this->nums;
-    stu_ID += std::to_string(num);
-    stu_ID += std::to_string(get_check_code(stu_ID));
-    this->nums++;
-    return stu_ID;
+    return this->nums;
 }
 
-bool CardManager::open_account(std::string stu_ID, std::string name)
+
+std::string CardManager::get_card_ID()
+//获取卡_ID
+{
+    std::string card_ID = "3";
+    int num = std::stoi(this->start_ID) + this->nums;
+    card_ID += std::to_string(num);
+    card_ID += std::to_string(get_check_code(card_ID));
+    this->nums++;
+    return card_ID;
+}
+
+bool CardManager::open_account(std::string tm, std::string stu_ID, std::string name)
 {
     //查找stu_ID是否存在
-    std::unordered_map<std::string, Person *>::iterator iter = Map_IDtoPerson.find(stu_ID);
+    auto iter = Map_IDtoPerson.find(stu_ID);
     if(iter != Map_IDtoPerson.end())
+    //若不存在，则卡户失败
     {
-        logger.write_operation_record(new operation_record(logger.time, name, stu_ID, "开户", false));
+        //写入日志
+        logger.write_operation_record(new operation_record(tm, name, stu_ID, "开户", false));
         return false;
     }
     //新建账户
     Person *one = new Person(stu_ID, name);
     //将账户纳入管理
+    //push进账户列表
     this->personlist.push_back(one);
+    //插入关系表
     Map_IDtoPerson.insert(std::make_pair(stu_ID, one));
-    logger.write_operation_record(new operation_record(logger.time, name, stu_ID, "开户", true));
+    //写入日志
+    logger.write_operation_record(new operation_record(tm, name, stu_ID, "开户", true));
     return true;
 }
 
-bool CardManager::issue_card()
+bool CardManager::issue_card(std::string tm)
+//对符合条件账户发卡
 {
-    //对符合条件账户发卡
-    for(unsigned int i = 0; i<this->personlist.size(); i++)
+    for(auto one : this->personlist)
     {
-        Person *one = personlist[i];
-        if(one->cardlist->size() == 0)
+        if(one->is_valid() == true)
+        //判断账户是否有效
         {
-            std::string card_ID = get_card_ID();
-            Card* newone = new Card(personlist[i], card_ID, "8888");
-            this->cardlist.push_back(newone);
-            Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
-            one->cardlist->push_back(newone);
-            one->valid_one = newone;
-            logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "发卡", true));
+            if(one->cardlist->size() == 0)
+            {
+                //获取卡号
+                std::string card_ID = get_card_ID();
+                //新建卡
+                Card *new_card = new Card(one, card_ID, "8888");
+                //加入管理
+                this->cardlist.push_back(new_card);
+                this->Map_CIDtoCard.insert(std::make_pair(card_ID, new_card));
+                //对账户设置
+                one->cardlist->push_back(new_card);
+                one->valid_one = new_card;
+                //写入日志
+                logger.write_operation_record(new operation_record(tm,one->get_name(), one->get_stu_ID(), "发卡", true));
+            }
         }
     }
     return true;
 }
 
 
-bool CardManager::reissue_card(Person *one)
+bool CardManager::reissue_card(std::string tm, Person *one)
+//重新办卡或发卡
 {
-    //挂失最新卡
-    if(one->valid_one != nullptr)
-        one->valid_one->report_lost();
-    //获取卡号
-    std::string card_ID = get_card_ID();
-    Card *newone = new Card(one, card_ID, "8888");
-    //
-    one->cardlist->push_back(newone);
-    one->valid_one = newone;
-    this->cardlist.push_back(newone);
-    this->Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
-    logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "补卡", true));
+    bool flag;
+    if(one->is_valid() == false)
+    {
+        flag = false;
+    }
+    else
+    {
+        //挂失最新卡
+        if(one->valid_one != nullptr)
+        //若存在
+            one->valid_one->report_lost();
+        //获取卡号
+        std::string card_ID = get_card_ID();
+        //新建卡
+        Card *newone = new Card(one, card_ID, "8888");
+        //加入管理
+        this->cardlist.push_back(newone);
+        this->Map_CIDtoCard.insert(std::make_pair(card_ID, newone));
+        //对账户设置
+        one->cardlist->push_back(newone);
+        one->valid_one = newone;
+        flag = true;
+    }
+    //写入日志
+    logger.write_operation_record(new operation_record(tm, one->get_name(),one->get_stu_ID(), "补卡", flag));
     return true;
 }
 
-bool CardManager::report_lost(Card *one)
+bool CardManager::report_lost(std::string tm,Card *one)
+//挂失
 {
-    bool flag = one->report_lost();
-    logger.write_operation_record(new operation_record(logger.time,one->owner->get_name(), one->owner->get_stu_ID(), "挂失", flag));
-    return flag;
-}
-
-bool CardManager::remove_lost(Card *one)
-{
-    bool flag = one->remove_lost();
-    logger.write_operation_record(new operation_record(logger.time,one->owner->get_name(), one->owner->get_stu_ID(), "解挂", flag));
-    return flag;
-}
-
-bool CardManager::cancel_account(Person *one)
-{
-    bool flag = one->cancel_account();
-    logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "开户", flag));
-    return flag;
-}
-
-bool CardManager::recover_account(Person *one)
-{
-    bool flag = one->recover_account();
-    logger.write_operation_record(new operation_record(logger.time,one->get_name(), one->get_stu_ID(), "开户", flag));
-    return flag;
-}
-
-bool CardManager::add_money(Person *one, int x)
-{
-    bool flag = one->add_money(x);
-    logger.write_operation_record(new operation_record(logger.time, one->get_name(),one->get_stu_ID(), "充值" + std::to_string(x/100) , flag));
-    return flag;
-}
-
-bool CardManager::consume(std::string card_ID, int x)
-{
-    auto iter = this->Map_CIDtoCard.find(card_ID);
-    if(iter == this->Map_CIDtoCard.end())
+    bool flag;
+    if(one->owner->is_valid() == false)
+    //判断账户是否有效
+        flag = false;
+    else
     {
-        return false;
+        //挂失
+        flag = one->report_lost();
     }
-    Person *one = iter->second->owner;
-    bool flag = one->consume(x);
+    logger.write_operation_record(new operation_record(tm,one->owner->get_name(), one->owner->get_stu_ID(), "挂失", flag));
     return flag;
 }
+
+bool CardManager::remove_lost(std::string tm, Card *one)
+{
+    bool flag;
+    if(one->owner->is_valid() == false)
+    //判断账户是否有效
+    {
+        flag = false;
+    }
+    else
+    {   
+        //解挂
+        flag = one->remove_lost();
+    }
+    logger.write_operation_record(new operation_record(tm,one->owner->get_name(), one->owner->get_stu_ID(), "解挂", flag));
+    return flag;
+}
+
+bool CardManager::cancel_account(std::string tm, Person *one)
+{
+    //销户
+    bool flag = one->cancel_account();
+    //日志
+    logger.write_operation_record(new operation_record(tm,one->get_name(), one->get_stu_ID(), "开户", flag));
+    return flag;
+}
+
+bool CardManager::recover_account(std::string tm, Person *one)
+{
+    //恢复账户
+    bool flag = one->recover_account();
+    //日志记录
+    logger.write_operation_record(new operation_record(tm,one->get_name(), one->get_stu_ID(), "开户", flag));
+    return flag;
+}
+
+bool CardManager::add_money(std::string tm, Person *one, int x)
+{
+    //充值
+    bool flag;
+    if(one->is_valid() == false)
+        flag = false;
+    else 
+        flag = one->add_money(x);
+    //日志记录
+    logger.write_operation_record(new operation_record(tm, one->get_name(),one->get_stu_ID(), "充值" + std::to_string(x/100) , flag));
+    return flag;
+}
+

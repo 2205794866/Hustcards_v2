@@ -93,5 +93,7 @@ private:
     void insert_operation_record(operation_record *);
     void insert_consume_record(consume_record *);
     Operation *get_operation(std::string);
+    Operation *get_consume_operation(std::string, int);
+    void execute(Operation *);
 };
 #endif // MAINWINDOW_H
