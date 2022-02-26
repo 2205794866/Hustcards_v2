@@ -38,17 +38,17 @@ public:
     //发卡
     bool issue_card(std::string tm);
     //补卡
-    bool reissue_card(std::string, Person *);
+    bool reissue_card(std::string, std::string stu_ID);
     //挂失
-    bool report_lost(std::string, Card *);
+    bool report_lost(std::string, std::string stu_ID);
     //解挂
-    bool remove_lost(std::string, Card *);
+    bool remove_lost(std::string, std::string stu_ID);
     //销户
-    bool cancel_account(std::string, Person *);
+    bool cancel_account(std::string, std::string stu_ID);
     //恢复
-    bool recover_account(std::string, Person *);
+    bool recover_account(std::string, std::string stu_ID);
     //充值
-    bool add_money(std::string, Person *one, int x);
+    bool add_money(std::string, std::string stu_ID, int x);
 
 };
 

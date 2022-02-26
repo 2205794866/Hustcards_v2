@@ -1,14 +1,21 @@
 #include "stu_info_func.h"
 #include "ui_stu_info_func.h"
 
-stu_info_func::stu_info_func(CardManager *CM,int func_num, Person *one, QWidget *parent) :
+stu_info_func::stu_info_func(CardManager *CM,int func_num,std::string stu_ID, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::stu_info_func)
 {
     ui->setupUi(this);
     this->setWindowTitle("学生信息");
     this->CM = CM;
-    this->one = one;
+    this->stu_ID = stu_ID;
+    Person *one = nullptr;
+    auto iter = this->CM->Map_IDtoPerson.find(stu_ID);
+    if(iter != this->CM->Map_IDtoPerson.end())
+    {
+        one = iter->second;
+    }
+
     this->func_num = func_num;
     this->card_model = new QStandardItemModel;
 
@@ -23,11 +30,12 @@ stu_info_func::stu_info_func(CardManager *CM,int func_num, Person *one, QWidget 
 
     //card list
     card_model->setHorizontalHeaderItem(0, new QStandardItem(tr("卡号")));
-    for(unsigned int i = 0; i<one->cardlist->size(); i++)
+    Card *p = one->head->next;
+    int i = 0;
+    while(p != nullptr)
     {
-        Card *new_one = (*one->cardlist)[i];
-        QStandardItem *item = new QStandardItem(QString::fromStdString(new_one->get_card_ID()));
-        if(new_one->is_valid() == true)
+        QStandardItem *item = new QStandardItem(QString::fromStdString(p->get_card_ID()));
+        if(p->is_valid() == true)
         {
             item->setBackground(Qt::green);
         }
@@ -36,6 +44,8 @@ stu_info_func::stu_info_func(CardManager *CM,int func_num, Person *one, QWidget 
             item->setBackground(Qt::red);
         }
         card_model->setItem(i, item);
+        p = p->next;
+        i++;
     }
     // func_num = 0 销户
     if(func_num == 0)
@@ -68,7 +78,7 @@ void stu_info_func::on_buttonBox_accepted()
 {
     if(this->func_num == 0)
     {
-        if(this->CM->cancel_account(logger.time, one) == true)
+        if(this->CM->cancel_account(logger.time, stu_ID) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();
@@ -81,7 +91,7 @@ void stu_info_func::on_buttonBox_accepted()
     }
     else if(this->func_num == 1)
     {
-        if(this->CM->reissue_card(logger.time,one) == true)
+        if(this->CM->reissue_card(logger.time, stu_ID) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();
@@ -94,7 +104,7 @@ void stu_info_func::on_buttonBox_accepted()
     }
     else if(this->func_num == 2)
     {
-        if(this->CM->report_lost(logger.time,one->valid_one) == true)
+        if(this->CM->report_lost(logger.time,stu_ID) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();
@@ -107,8 +117,7 @@ void stu_info_func::on_buttonBox_accepted()
     }
     else if(this->func_num == 3)
     {
-        Card *card_one = *(one->cardlist->end() - 1);
-        if(card_one->is_valid() == false && this->CM->remove_lost(logger.time,card_one) == true)
+        if(this->CM->remove_lost(logger.time, stu_ID) == true)
         {
             succeed *ui_succeed = new succeed(this);
             ui_succeed->show();

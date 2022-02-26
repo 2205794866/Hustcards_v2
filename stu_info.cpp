@@ -1,14 +1,20 @@
 #include "stu_info.h"
 #include "ui_stu_info.h"
 
-stu_info::stu_info(CardManager *CM, Person *one, QWidget *parent) :
+stu_info::stu_info(CardManager *CM, std::string stu_ID, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::stu_info)
 {
     ui->setupUi(this);
     this->setWindowTitle("学生信息");
     this->CM = CM;
-    this->one = one;
+    this->stu_ID = stu_ID;
+    Person *one = nullptr;
+    auto iter = this->CM->Map_IDtoPerson.find(stu_ID);
+    if(iter != this->CM->Map_IDtoPerson.end())
+    {
+        one = iter->second;
+    }
 
     this->card_model = new QStandardItemModel;
 
@@ -24,23 +30,23 @@ stu_info::stu_info(CardManager *CM, Person *one, QWidget *parent) :
 
     //card list
     card_model->setHorizontalHeaderItem(0, new QStandardItem(tr("卡号")));
-    for(unsigned int i = 0; i<one->cardlist->size(); i++)
+    Card *p = one->head->next;
+    int i = 0;
+    while(p != nullptr)
     {
-//        std::cout << i << std::endl;
-        Card *new_one = (*one->cardlist)[i];
-        QStandardItem *item = new QStandardItem(QString::fromStdString(new_one->get_card_ID()));
-        if(new_one->is_valid() == true)
+        QStandardItem *item = new QStandardItem(QString::fromStdString(p->get_card_ID()));
+        if(p->is_valid() == true)
         {
             item->setBackground(Qt::green);
         }
         else
         {
-//            std::cout << 1 << std::endl;
             item->setBackground(Qt::red);
         }
         card_model->setItem(i, item);
+        p = p->next;
+        i++;
     }
-
 
 }
 

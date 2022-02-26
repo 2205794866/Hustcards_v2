@@ -7,7 +7,8 @@ Person::Person(std::string stu_ID, std::string name)
     this->name = name;
     this->money = 0;
     //新建卡列表
-    this->cardlist = new std::vector<Card *>;
+    // this->cardlist = new std::vector<Card *>;
+    this->head = this->tail = new Card(this, "");
     //有效卡无
     valid_one = nullptr;
     //初始为有效

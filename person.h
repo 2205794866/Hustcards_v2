@@ -1,8 +1,7 @@
 #ifndef PERSON_H
 #define PERSON_H
 #include "std.h"
-
-class Card;
+#include <card.h>
 
 class Person
 {
@@ -10,8 +9,10 @@ public:
     //有效卡
     Card *valid_one;
     //卡表
-    std::vector <Card *> *cardlist;
-
+    // std::vector <Card *> *cardlist;
+    Card *head;
+    Card *tail;
+    int card_size;
 
     // 新建账户
     Person(std::string stu_ID, std::string name);

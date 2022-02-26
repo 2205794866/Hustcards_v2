@@ -19,7 +19,7 @@ class stu_info_func : public QDialog
     Q_OBJECT
 
 public:
-    explicit stu_info_func(CardManager *CM,int func_num, Person *one, QWidget *parent = nullptr);
+    explicit stu_info_func(CardManager *CM,int func_num, std::string , QWidget *parent = nullptr);
     ~stu_info_func();
 
 private slots:
@@ -30,7 +30,7 @@ private:
     int func_num;
     QStandardItemModel *card_model;
     CardManager *CM;
-    Person *one;
+    std::string stu_ID;
 };
 
 #endif // STU_INFO_FUNC_H

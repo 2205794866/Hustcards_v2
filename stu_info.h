@@ -16,7 +16,7 @@ class stu_info : public QDialog
     Q_OBJECT
 
 public:
-    explicit stu_info(CardManager *CM, Person *one,QWidget *parent = nullptr);
+    explicit stu_info(CardManager *CM, std::string stu_ID,QWidget *parent = nullptr);
     ~stu_info();
 
 private:
@@ -25,7 +25,7 @@ private:
     QStandardItemModel *card_model;
 
     CardManager *CM;
-    Person *one;
+    std::string stu_ID;
 };
 
 #endif // STU_INFO_H

@@ -22,26 +22,15 @@ void add_money::on_buttonBox_accepted()
     std::string stu_ID = ui->stu_ID->toPlainText().toStdString();
     int money = ui->money->toPlainText().toInt() * 100;
 //    std::cout << money <<std::endl;
-    auto iter = this->CM->Map_IDtoPerson.find(stu_ID);
-    if(iter == this->CM->Map_IDtoPerson.end())
+    if(this->CM->add_money(logger.time,stu_ID, money) == true)
     {
-
-        fail *ui_fail = new fail(this);
-        ui_fail->show();
+        succeed *ui_succeed = new succeed(this);
+        ui_succeed->show();
     }
     else
     {
-        Person *one = iter->second;
-        if(this->CM->add_money(logger.time, one, money) == true)
-        {
-            succeed *ui_succeed = new succeed(this);
-            ui_succeed->show();
-        }
-        else
-        {
-            fail *ui_fail = new fail(this);
-            ui_fail->show();
-        }
+        fail *ui_fail = new fail(this);
+        ui_fail->show();
     }
 
 }

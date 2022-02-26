@@ -1,9 +1,9 @@
 #ifndef CARD_H
 #define CARD_H
 #include "std.h"
-#include "person.h"
 
 
+class Person;
 
 
 
@@ -12,6 +12,8 @@ class Card
 public:
     //卡主
     Person *owner;
+    //下一张卡
+    Card *next;
     //新建卡
     Card(Person *owner, std::string Card_ID, std::string password = "8888");
     //挂失
@@ -22,6 +24,7 @@ public:
     std::string get_card_ID();
     //获取是否有效
     bool is_valid();
+    
 private:
     //密码
     std::string password;
@@ -31,9 +34,6 @@ private:
     std::string card_ID;
     //是否有效
     bool valid;
-    
-
-    
     
 
 };

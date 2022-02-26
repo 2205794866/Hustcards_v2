@@ -7,6 +7,7 @@ Card::Card(Person *owner, std::string card_ID, std::string password)
     this->card_ID = card_ID;
     this->password = password;
     this->valid = true;
+    this->next = nullptr;
 }
 
 bool Card::is_valid()

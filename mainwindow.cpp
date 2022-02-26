@@ -15,8 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     //界面信息
     //model
     stu_model = new QStandardItemModel;
-    operation_model = new QStandardItemModel;
-    consume_model = new QStandardItemModel;
+    record_model = new QStandardItemModel;
 
     // 输出学生信息
     ui->stus_info->setModel(stu_model);
@@ -33,29 +32,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stus_info->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选中模式为选中行
     ui->stus_info->setSelectionMode( QAbstractItemView::SingleSelection); //设置选中单行
     //设置日志
-    ui->operation_list->setModel(operation_model);
-    ui->consume_list->setModel(consume_model);
-
-    operation_model->setHorizontalHeaderLabels(QStringList()<<"时间"<<"学号"<<"姓名"<<"操作内容"<<"状态");
-    consume_model->setHorizontalHeaderLabels(QStringList() << "时间" << "窗口号" << "卡号" << "金额" << "状态");
+    ui->record_list->setModel(record_model);
+    record_model->setHorizontalHeaderLabels(QStringList() << "序号" << "时间" << "卡号" << "金额");
     //设置
-    ui->operation_list->horizontalHeader()->setVisible(true);//显示或隐藏表头
-    ui->operation_list->verticalHeader()->setVisible(true);//显示或隐藏序列行
-    ui->operation_list->setAutoScroll(true);//自动滚动条
-    ui->operation_list->resizeColumnsToContents(); //根据内容调整大小
-    ui->operation_list->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//根据容器调整大小
-    ui->operation_list->setEditTriggers(QAbstractItemView::NoEditTriggers);//只读
-    ui->operation_list->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选中模式为选中行
-    ui->operation_list->setSelectionMode( QAbstractItemView::SingleSelection); //设置选中单行
 
-    ui->consume_list->horizontalHeader()->setVisible(true);//显示或隐藏表头
-    ui->consume_list->verticalHeader()->setVisible(true);//显示或隐藏序列行
-    ui->consume_list->setAutoScroll(true);//自动滚动条
-    ui->consume_list->resizeColumnsToContents(); //根据内容调整大小
-    ui->consume_list->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//根据容器调整大小
-    ui->consume_list->setEditTriggers(QAbstractItemView::NoEditTriggers);//只读
-    ui->consume_list->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选中模式为选中行
-    ui->consume_list->setSelectionMode( QAbstractItemView::SingleSelection); //设置选中单行
+    ui->record_list->horizontalHeader()->setVisible(true);//显示或隐藏表头
+    ui->record_list->verticalHeader()->setVisible(false);//显示或隐藏序列行
+    ui->record_list->setAutoScroll(true);//自动滚动条
+    ui->record_list->resizeColumnsToContents(); //根据内容调整大小
+    ui->record_list->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//根据容器调整大小
+    ui->record_list->setEditTriggers(QAbstractItemView::NoEditTriggers);//只读
+    ui->record_list->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选中模式为选中行
+    ui->record_list->setSelectionMode( QAbstractItemView::SingleSelection); //设置选中单行
 
     //menu bar
     //搜索
@@ -97,50 +85,25 @@ void MainWindow::insert_data(unsigned int row_num, std::string stu_ID, std::stri
     stu_model->setItem(row_num, 3, new QStandardItem(Qmoney));
 }
 
-void MainWindow::insert_operation_record(operation_record *record)
-//插入操作日志表格
-{
-    QString Qtime = QString::fromStdString(record->time);
-    QString Qstu_ID = QString::fromStdString(record->stu_ID);
-    QString Qname = QString::fromStdString(record->name);
-    QString Qoperation = QString::fromStdString(record->operation);
-    QString Qflag;
-    if(record->succeed == true)
-        Qflag = tr("成功");
-    else
-        Qflag = tr("失败");
-    int row_num = operation_model->rowCount();
-    operation_model->setItem(row_num, 0, new QStandardItem(Qtime));
-    operation_model->setItem(row_num, 1, new QStandardItem(Qstu_ID));
-    operation_model->setItem(row_num, 2, new QStandardItem(Qname));
-    operation_model->setItem(row_num, 3, new QStandardItem(Qoperation));
-    operation_model->setItem(row_num, 4, new QStandardItem(Qflag));
-}
 
-void MainWindow::insert_consume_record(consume_record *record)
-//插入消费日志表格
+void MainWindow::insert_record(unsigned int row_num, record *one)
 {
-    QString Qtime = QString::fromStdString(record->time);
-    QString Qcanteen_ID = QString::asprintf("%d", record->canteen_ID);
-    QString Qcard_ID = QString::fromStdString(record->card_ID);
-    QString Qmoney = QString::asprintf("%d", record->money);
-    QString Qflag;
-    if(record->succeed == true)
-        Qflag = tr("成功");
-    else
-        Qflag = tr("失败");
-    int row_num = consume_model->rowCount();
-    consume_model->setItem(row_num, 0, new QStandardItem(Qtime));
-    consume_model->setItem(row_num, 1, new QStandardItem(Qcanteen_ID));
-    consume_model->setItem(row_num, 2, new QStandardItem(Qcard_ID));
-    consume_model->setItem(row_num, 3, new QStandardItem(Qmoney));
-    consume_model->setItem(row_num, 4, new QStandardItem(Qflag));
+    QString Qrow_num = QString::asprintf("%d", row_num);
+    QString Qtm = QString::fromStdString(one->time);
+    QString Qcard_ID = QString::fromStdString(one->card_ID);
+    QString Qmoney = QString::asprintf("%d.%02d", one->money/100, one->money%100);;
+    QList<QStandardItem *> list;
+    list.append(new QStandardItem(Qrow_num));
+    list.append(new QStandardItem(Qtm));
+    list.append(new QStandardItem(Qcard_ID));
+    list.append(new QStandardItem(Qmoney));
+    record_model->appendRow(list);
 }
-
 
 
 void MainWindow::on_show_data_clicked()
 {
+    this->on_clear_data_clicked();
     int num = 0;
     for(auto one: this->CM->personlist)
     //遍历账户表
@@ -154,7 +117,7 @@ void MainWindow::on_show_data_clicked()
 void MainWindow::on_Input_all_triggered()
 {
     //打开文件
-    std::ifstream afile("d:\\Study\\Project\\Hustcards_v2\\Data\\v3\\kh001.txt");
+    std::ifstream afile("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\kh001.txt");
     char buff[255];
     std::string str;
     //获取第一行
@@ -197,7 +160,7 @@ void MainWindow::on_stus_info_doubleClicked(const QModelIndex &index)
 {
     std::string stu_ID = stu_model->item(index.row(), 1)->text().toStdString();
     Person *one = this->CM->Map_IDtoPerson.find(stu_ID)->second;
-    stu_info *ui_stu_info = new stu_info(this->CM,one,this);
+    stu_info *ui_stu_info = new stu_info(this->CM,one->get_stu_ID(),this);
     ui_stu_info->show();
 }
 
@@ -254,20 +217,6 @@ void MainWindow::on_add_money_triggered()
 {
     add_money *ui_add_money = new add_money(this->CM, this);
     ui_add_money->show();
-}
-
-
-void MainWindow::on_open_log_triggered()
-{
-    // for(auto iter = logger.operation_list.begin(); iter < logger.operation_list.end(); iter ++)
-    // {
-    //     insert_operation_record(*iter);
-    // }
-
-    // for(auto iter = logger.consume_list.begin(); iter < logger.consume_list.end(); iter ++)
-    // {
-    //     insert_consume_record(*iter);
-    // }
 }
 
 
@@ -349,29 +298,23 @@ void MainWindow::execute(Operation *one)
         this->CT->consume(new record(one->tm, one->canteen_ID,one->card_ID, one->money));
         return;
     }
-    auto iter = this->CM->Map_IDtoPerson.find(one->stu_ID);
-    if(iter == this->CM->Map_IDtoPerson.end())
-        return;
     else
     {
-        Person *person = iter->second;
-        Card *last_card;
         switch (one->func_num) {
         case 1:
-            this->CM->cancel_account(one->tm, person);break;
+            this->CM->cancel_account(one->tm, one->stu_ID);break;
         case 2:
-            this->CM->reissue_card(one->tm, person);break;
+            this->CM->reissue_card(one->tm, one->stu_ID);break;
         case 3:
-            if(person->valid_one != nullptr)
-                this->CM->report_lost(one->tm, person->valid_one);
+            this->CM->report_lost(one->tm, one->stu_ID);
             break;
         case 4:
-            last_card = *(person->cardlist->end() - 1);
-            if(last_card != nullptr)
-                this->CM->remove_lost(one->tm, last_card);
+                this->CM->remove_lost(one->tm,one->stu_ID);
             break;
         case 5:
-            this->CM->add_money(one->tm, person, one->money);
+            this->CM->add_money(one->tm, one->stu_ID, one->money);
+            break;
+        case 6: this->CT->consume(new record(one->tm, one->canteen_ID,one->card_ID, one->money));
             break;
         }
     }
@@ -387,10 +330,8 @@ void MainWindow::on_operate_all_triggered()
     char buff[255];
     std::string str;
     std::ifstream fp;
-
-
     clock_t start1 = clock();
-    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v3\\cz002.txt"); 
+    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\cz002.txt"); 
     fp.getline(buff, 255);
     str = buff;
     if(str == "CZ")
@@ -414,7 +355,7 @@ void MainWindow::on_operate_all_triggered()
 
     //
     clock_t start2 = clock();
-    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v3\\wz003.txt");
+    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\wz003.txt");
     fp.getline(buff, 255);
     str = buff;
     if(str == "WZ")
@@ -440,7 +381,7 @@ void MainWindow::on_operate_all_triggered()
 
     //
     clock_t start3 = clock();
-    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v3\\xf014.txt");
+    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\xf014.txt");
     fp.getline(buff, 255);
     str = buff;
     if(str == "XF")
@@ -485,24 +426,82 @@ void MainWindow::on_operate_all_triggered()
         Operation *one = que.top();
         que.pop();
         int canteen_ID = one->canteen_ID;
-        ans.push_back(one);
+        ans.emplace_back(one);
         if(!data[canteen_ID].empty())
         {
             que.push(data[canteen_ID].front());
             data[canteen_ID].pop();
         }
     }
+    //clear
+    for(int i = 0; i<100; i++)
+        std::queue<Operation *>().swap(data[i]);
+
     clock_t finish4 = clock();
     std::cout << "merged takes:" << (double)(finish4 - start4) / CLOCKS_PER_SEC << std::endl;
-
-
     clock_t start5 = clock();
     for(auto one: ans)
     {
         execute(one);
         delete one;
     }
+    std::vector<Operation *>().swap(ans);
     clock_t finish5 = clock();
     std::cout << "operation takes:" << (double)(finish5 - start5) / CLOCKS_PER_SEC << std::endl;
+}
+
+
+void MainWindow::on_to_begin_clicked()
+{
+    ui->canteen_ID->setValue(1);
+}
+
+
+void MainWindow::on_to_end_clicked()
+{
+    ui->canteen_ID->setValue(99);
+}
+
+
+void MainWindow::on_sub_one_clicked()
+{
+    int canteen_ID = ui->canteen_ID->value();
+    if(canteen_ID > 1)
+    {
+        ui->canteen_ID->setValue(canteen_ID - 1);
+    }
+}
+
+
+void MainWindow::on_add_one_clicked()
+{
+    int canteen_ID = ui->canteen_ID->value();
+    if(canteen_ID < 99)
+    {
+        ui->canteen_ID->setValue(canteen_ID + 1);
+    }
+}
+
+
+void MainWindow::on_canteen_ID_valueChanged(int arg1)
+{
+    this->record_model->removeRows(0, record_model->rowCount());
+    int canteen_ID = arg1;
+    unsigned int nums = CT->recordlist[canteen_ID].size();
+    QString str = QString::asprintf("%d号窗口消费记录数为%d", canteen_ID, nums);
+    ui->nums->setText(str);
+    for(unsigned int i = 0; i< nums; i++)
+    {
+        record *one = CT->recordlist[canteen_ID][i];
+        if(one != nullptr)
+            insert_record(i, one);
+    }
+}
+
+
+void MainWindow::on_tabWidget_tabBarClicked(int index)
+{
+    if(index == 1)
+        ui->canteen_ID->setValue(1);
 }
 

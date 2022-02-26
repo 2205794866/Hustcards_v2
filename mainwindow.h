@@ -72,11 +72,21 @@ private slots:
 
     void on_add_money_triggered();
 
-    void on_open_log_triggered();
-
     void on_consume_triggered();
 
     void on_operate_all_triggered();
+
+    void on_to_begin_clicked();
+
+    void on_to_end_clicked();
+
+    void on_sub_one_clicked();
+
+    void on_add_one_clicked();
+
+    void on_canteen_ID_valueChanged(int arg1);
+
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::MainWindow *ui;
@@ -84,16 +94,14 @@ private:
     canteen *CT;
     //QTableView model
     QStandardItemModel *stu_model;
-    QStandardItemModel *operation_model;
-    QStandardItemModel *consume_model;
+    QStandardItemModel *record_model;
 
 
     //func
     void insert_data(unsigned int row_num, std::string stu_ID, std::string name, int money);
-    void insert_operation_record(operation_record *);
-    void insert_consume_record(consume_record *);
     Operation *get_operation(std::string);
     Operation *get_consume_operation(std::string, int);
+    void insert_record(unsigned int ,record *);
     void execute(Operation *);
 };
 #endif // MAINWINDOW_H
