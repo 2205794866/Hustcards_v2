@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "std.h"
-#include "stu_info_func.h"
+#include "stu_info.h"
 #include "cardmanager.h"
 #include "succeed.h"
 #include "fail.h"

@@ -25,9 +25,13 @@ int main()
     // str_money.erase(str_money.find("."), 1);
     // money = std::stoi(str_money);
     // std::cout << tm << " " << card_ID << " "<< money << std::endl;
-    int ID = 1;
-    char canteen[20];
-    sprintf(canteen, "%2d", ID);
-    cout << canteen << endl;
+    // int ID = 1;
+    // char canteen[20];
+    // sprintf(canteen, "%2d", ID);
+    // cout << canteen << endl;
+    char buff[20];
+    string s = "你好啊";
+    sprintf(buff, "%s", s.c_str());
+    cout << buff << endl;
     return 0;
 }

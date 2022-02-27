@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     //窗口名
     this->setWindowTitle("HUSTCards");
+    ui->tabWidget->setCurrentIndex(0);
     //初始化
     this->CM = new CardManager;
     this->CT = new canteen(this->CM);
@@ -63,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->all_menu->addAction(ui->issue_all_card);
     ui->all_menu->addAction(ui->operate_all);
     //日志操作
-    ui->log_menu->addAction(ui->open_log);
 }
 
 MainWindow::~MainWindow()
@@ -160,7 +160,7 @@ void MainWindow::on_stus_info_doubleClicked(const QModelIndex &index)
 {
     std::string stu_ID = stu_model->item(index.row(), 1)->text().toStdString();
     Person *one = this->CM->Map_IDtoPerson.find(stu_ID)->second;
-    stu_info *ui_stu_info = new stu_info(this->CM,one->get_stu_ID(),this);
+    stu_info *ui_stu_info = new stu_info(this->CM, 0, one->get_stu_ID(),this);
     ui_stu_info->show();
 }
 
@@ -181,17 +181,31 @@ void MainWindow::on_issue_all_card_triggered()
 }
 
 
+void MainWindow::on_search_person_triggered()
+//查找
+{
+    search_stu *ui_search_stu = new search_stu(this->CM, 0, this);
+    ui_search_stu->show();
+}
+
 void MainWindow::on_remove_person_triggered()
 //销户
 {
-    search_stu *ui_search_stu = new search_stu(this->CM, 0, this);
+    search_stu *ui_search_stu = new search_stu(this->CM, 1, this);
+    ui_search_stu->show();
+}
+
+void MainWindow::on_recover_account_triggered()
+//恢复账户
+{
+    search_stu *ui_search_stu = new search_stu(this->CM, 2, this);
     ui_search_stu->show();
 }
 
 void MainWindow::on_issue_card_triggered()
 //补卡
 {
-    search_stu *ui_search_stu = new search_stu(this->CM, 1, this);
+    search_stu *ui_search_stu = new search_stu(this->CM, 3, this);
     ui_search_stu->show();
 }
 
@@ -199,7 +213,7 @@ void MainWindow::on_issue_card_triggered()
 void MainWindow::on_report_lost_triggered()
 //挂失
 {
-    search_stu *ui_search_stu = new search_stu(this->CM, 2, this);
+    search_stu *ui_search_stu = new search_stu(this->CM, 4, this);
     ui_search_stu->show();
 }
 
@@ -207,7 +221,7 @@ void MainWindow::on_report_lost_triggered()
 void MainWindow::on_remove_lost_triggered()
 //解挂
 {
-    search_stu *ui_search_stu = new search_stu(this->CM, 3, this);
+    search_stu *ui_search_stu = new search_stu(this->CM, 5, this);
     ui_search_stu->show();
 }
 
@@ -504,4 +518,7 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
     if(index == 1)
         ui->canteen_ID->setValue(1);
 }
+
+
+
 

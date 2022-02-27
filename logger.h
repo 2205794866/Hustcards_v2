@@ -1,7 +1,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 #include "std.h"
-
+#include <string.h>
 
 
 typedef  struct _operation_record
@@ -49,7 +49,8 @@ public:
     ~Logger();
 private:
     //操作日志和消费日志文件
-    std::fstream afile, bfile;
+    // std::fstream afile, bfile;
+    FILE *fp1, *fp2;
 
 };
 

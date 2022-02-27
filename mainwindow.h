@@ -88,6 +88,10 @@ private slots:
 
     void on_tabWidget_tabBarClicked(int index);
 
+    void on_search_person_triggered();
+
+    void on_recover_account_triggered();
+
 private:
     Ui::MainWindow *ui;
     CardManager *CM;
@@ -95,7 +99,6 @@ private:
     //QTableView model
     QStandardItemModel *stu_model;
     QStandardItemModel *record_model;
-
 
     //func
     void insert_data(unsigned int row_num, std::string stu_ID, std::string name, int money);

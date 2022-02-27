@@ -21,8 +21,18 @@ void search_stu::on_buttonBox_accepted()
     std::unordered_map<std::string, Person *>::iterator iter = this->CM->Map_IDtoPerson.find(stu_ID);
     if(iter != this->CM->Map_IDtoPerson.end())
     {
-        stu_info_func *ui_stu_info_func = new stu_info_func(this->CM, func_num, iter->second->get_stu_ID(), this);
-        ui_stu_info_func->show();
+        if(iter->second->is_valid() == false && func_num != 2)
+        {
+
+            fail *ui_fail = new fail(this);
+            ui_fail->show();
+        }
+        else
+        {
+            stu_info *ui_stu_info_func = new stu_info(this->CM, func_num, iter->second->get_stu_ID(), this);
+            ui_stu_info_func->show();
+        }
+
     }
     else
     {

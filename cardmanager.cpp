@@ -279,12 +279,14 @@ bool CardManager::add_money(std::string tm, std::string stu_ID, int x)
     {
         flag = false;
         err_msg = "无此账户";
-        logger.write_operation_record(new operation_record(tm, " ", stu_ID, "充值", flag, err_msg));
+        logger.write_operation_record(new operation_record(tm, " ", stu_ID, "充值" + std::to_string(x/100), flag, err_msg));
         return flag;
     }
     else
     {
         Person *one = iter->second;
+        char left[20];
+        sprintf(left, "%d.%02d", one->get_money()/ 100, one->get_money() % 100);
         if (one->is_valid() == false)
         {
             flag = false;
@@ -297,12 +299,10 @@ bool CardManager::add_money(std::string tm, std::string stu_ID, int x)
             {
                 err_msg = "充值失败";
             }
-            char left[20];
-            sprintf(left, "%d.%02d", one->get_money()/ 100, one->get_money() % 100);
-            logger.write_operation_record(new operation_record(tm, " ", stu_ID, "充值:" + std::to_string(x/100) + " 余额:" + left, flag, err_msg));
+            logger.write_operation_record(new operation_record(tm, one->get_name(), stu_ID, "充值:" + std::to_string(x/100) + "余额:" + left, flag, err_msg));
             return flag;
         }
-        logger.write_operation_record(new operation_record(tm, " ", stu_ID, "充值:" + std::to_string(x/100), flag, err_msg));
+        logger.write_operation_record(new operation_record(tm, one->get_name(), stu_ID, "充值:" + std::to_string(x/100) + "余额:" + left, flag, err_msg));
         return flag;
     }
 }

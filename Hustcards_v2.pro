@@ -23,7 +23,6 @@ SOURCES += \
     person.cpp \
     search_stu.cpp \
     stu_info.cpp \
-    stu_info_func.cpp \
     succeed.cpp
 
 HEADERS += \
@@ -41,7 +40,6 @@ HEADERS += \
     search_stu.h \
     std.h \
     stu_info.h \
-    stu_info_func.h \
     succeed.h
 
 FORMS += \
@@ -52,7 +50,6 @@ FORMS += \
     new_stu.ui \
     search_stu.ui \
     stu_info.ui \
-    stu_info_func.ui \
     succeed.ui
 
 # Default rules for deployment.
