@@ -395,17 +395,23 @@ void MainWindow::on_operate_all_triggered()
 
     //
     clock_t start3 = clock();
-    fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\xf014.txt");
-    fp.getline(buff, 255);
+    FILE *fp1;
+    // fp.open("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\xf014.txt");
+    fp1 = fopen("d:\\Study\\Project\\Hustcards_v2\\Data\\v4\\xf014.txt", "r");
+    fgets(buff, 255, fp1);
+
     str = buff;
+    str.pop_back();
+    std::cout << str << std::endl;
     if(str == "XF")
     {
         int canteen_ID = 0;
-        while(!fp.eof())
+        while(feof(fp1) == 0)
         {
-            if(fp.getline(buff, 255).good())
+            if(fgets(buff, 255, fp1) != NULL)
             {
                 str = buff;
+                str.pop_back();
                 if(str == "")
                     continue;
                 else if(str[0] == 'W')
@@ -420,7 +426,7 @@ void MainWindow::on_operate_all_triggered()
             }
         }
     }
-    fp.close();
+    fclose(fp1);
     clock_t finish3 = clock();
     std::cout << "read XF takes:" << (double)(finish3 - start3) / CLOCKS_PER_SEC << std::endl;
     //多路归并
