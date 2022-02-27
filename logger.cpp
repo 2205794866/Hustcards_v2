@@ -13,10 +13,16 @@ bool Logger::write_operation_record(operation_record *one)
 {
     // this->operation_list.push_back(one);
     std::string flag = one->flag == true ? "成功" : "失败";
+    // ofstream takes 26s
 //    afile << one->time << " " << one->stu_ID << " " << one->name << " " << one->operation << " " << flag << " " << one->err_msg << std::endl;
     char info[120];
     sprintf(info,"%s %s %s %s %s %s\n", one->time.c_str(), one->stu_ID.c_str(), one->name.c_str(), one->operation.c_str(), flag.c_str(), one->err_msg.c_str());
-    fwrite(info, strlen(info), 1, fp1);
+    // fwrite takes 3.9s
+    // fwrite(info, strlen(info), 1, fp1);
+    // fprintf takes 7.8s
+    // fprintf(fp1, "%s %s %s %s %s %s\n", one->time.c_str(), one->stu_ID.c_str(), one->name.c_str(), one->operation.c_str(), flag.c_str(), one->err_msg.c_str());
+    // fputs takes 4.1s
+    fputs(info, fp1);
     return true;
 }
 
@@ -31,7 +37,9 @@ bool Logger::write_consume_record(consume_record *one)
 //    bfile << one->time << " " << canteen_ID << " " << one->card_ID << " " << "消费:" << money << " 余额:" << left << " " << flag << " " << one->err_msg << std::endl;
     char info[120];
     sprintf(info,"%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money/100, one->money%100, one->left/100, one->left%100, flag.c_str(), one->err_msg.c_str());
-    fwrite(info, strlen(info), 1, fp2);
+    // fwrite(info, strlen(info), 1, fp2);
+    // fprintf(fp2, "%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money/100, one->money%100, one->left/100, one->left%100, flag.c_str(), one->err_msg.c_str());
+    fputs(info, fp2);
     return true;
 }
 
