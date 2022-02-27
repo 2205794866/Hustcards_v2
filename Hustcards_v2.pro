@@ -21,9 +21,12 @@ SOURCES += \
     new_stu.cpp \
     operation.cpp \
     person.cpp \
+    regex_search.cpp \
+    search_result.cpp \
     search_stu.cpp \
     stu_info.cpp \
-    succeed.cpp
+    succeed.cpp \
+    time_set.cpp
 
 HEADERS += \
     add_money.h \
@@ -37,10 +40,13 @@ HEADERS += \
     new_stu.h \
     operation.h \
     person.h \
+    regex_search.h \
+    search_result.h \
     search_stu.h \
     std.h \
     stu_info.h \
-    succeed.h
+    succeed.h \
+    time_set.h
 
 FORMS += \
     add_money.ui \
@@ -48,9 +54,12 @@ FORMS += \
     fail.ui \
     mainwindow.ui \
     new_stu.ui \
+    regex_search.ui \
+    search_result.ui \
     search_stu.ui \
     stu_info.ui \
-    succeed.ui
+    succeed.ui \
+    time_set.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

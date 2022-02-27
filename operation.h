@@ -19,8 +19,6 @@ public:
     Operation(std::string tm, std::string stu_ID, int money, int func_num);
     //消费
     Operation(std::string tm, int canteen_ID, std::string card_ID, int money, int func_num = 5);
-
-
 };
 
 struct cmp1

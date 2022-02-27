@@ -26,8 +26,8 @@
 
 
 
-
-
+#include "regex_search.h"
+#include "time_set.h"
 #include "std.h"
 #include "cardmanager.h"
 
@@ -91,6 +91,12 @@ private slots:
     void on_search_person_triggered();
 
     void on_recover_account_triggered();
+
+    void on_pushButton_clicked();
+
+    void on_regex_ID_search_triggered();
+
+    void on_regex_name_search_triggered();
 
 private:
     Ui::MainWindow *ui;

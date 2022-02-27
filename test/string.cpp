@@ -3,6 +3,7 @@
 #include <string>
 #include <queue>
 #include <stack>
+#include <regex>
 #include <unordered_map>
 #include <unordered_set>
 using namespace std;
@@ -29,9 +30,21 @@ int main()
     // char canteen[20];
     // sprintf(canteen, "%2d", ID);
     // cout << canteen << endl;
-    char buff[20];
-    string s = "你好啊";
-    sprintf(buff, "%s", s.c_str());
-    cout << buff << endl;
-    return 0;
+    // char buff[20];
+    // string s = "你好啊";
+    // sprintf(buff, "%s", s.c_str());
+    // cout << buff << endl;
+    // return 0;
+    std::string str = "12345";
+    std::string pattern = "^";
+    for(auto c:str)
+    {
+        if(c>='0' && c<=9)
+            pattern += c;
+        else if(c == '?')
+            pattern += "\\d?";
+        else if(c == '*')
+            pattern += "\\d*";
+    }
+    std::regex re(pattern);
 }

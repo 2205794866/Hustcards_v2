@@ -10,13 +10,28 @@
     <height>725</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -53,7 +68,7 @@
                  <item row="0" column="0">
                   <widget class="QPushButton" name="show_data">
                    <property name="text">
-                    <string>显示数据</string>
+                    <string>刷新数据</string>
                    </property>
                   </widget>
                  </item>
@@ -83,6 +98,11 @@
               </item>
               <item>
                <widget class="QGroupBox" name="info_group">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
                 <property name="title">
                  <string>统计信息</string>
                 </property>
@@ -211,7 +231,7 @@
      <x>0</x>
      <y>0</y>
      <width>1063</width>
-     <height>25</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="search_menu">
@@ -254,7 +274,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="search_person">
    <property name="text">
-    <string>查找学生</string>
+    <string>学号查找学生</string>
    </property>
   </action>
   <action name="Input_all">
@@ -313,6 +333,16 @@
   <action name="recover_account">
    <property name="text">
     <string>恢复账户</string>
+   </property>
+  </action>
+  <action name="regex_ID_search">
+   <property name="text">
+    <string>学号模糊查找学生</string>
+   </property>
+  </action>
+  <action name="regex_name_search">
+   <property name="text">
+    <string>姓名模糊查找学生</string>
    </property>
   </action>
  </widget>

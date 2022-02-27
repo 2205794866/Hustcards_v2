@@ -49,9 +49,12 @@ MainWindow::MainWindow(QWidget *parent)
     //menu bar
     //搜索
     ui->search_menu->addAction(ui->search_person);
+    ui->search_menu->addAction(ui->regex_ID_search);
+    ui->search_menu->addAction(ui->regex_name_search);
     //学生操作
     ui->stu_menu->addAction(ui->open_account);
     ui->stu_menu->addAction(ui->remove_person);
+    ui->stu_menu->addAction(ui->recover_account);
     ui->stu_menu->addAction(ui->add_money);
     //卡操作
     ui->card_menu->addAction(ui->issue_card);
@@ -527,4 +530,27 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
 
 
 
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    time_set *ui_time_set = new time_set(this);
+    ui_time_set->show();
+}
+
+
+void MainWindow::on_regex_ID_search_triggered()
+{
+    regex_search *ui_regex_search = new regex_search(this->CM, 0, this);
+    ui_regex_search->show();
+}
+
+
+
+
+void MainWindow::on_regex_name_search_triggered()
+{
+    regex_search *ui_regex_search = new regex_search(this->CM, 1, this);
+    ui_regex_search->show();
+}
 
