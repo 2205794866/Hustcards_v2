@@ -3,12 +3,14 @@
 
 #include <QDialog>
 #include <QDateTime>
+
 #include "succeed.h"
 #include "fail.h"
 #include "logger.h"
 namespace Ui {
 class time_set;
 }
+
 
 class time_set : public QDialog
 {
@@ -23,6 +25,9 @@ private slots:
 
 private:
     Ui::time_set *ui;
+
+
+
 };
 
 #endif // TIME_SET_H

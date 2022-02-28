@@ -15,6 +15,10 @@ Person::Person(std::string stu_ID, std::string name)
     valid = true;
     //卡数为0
     card_nums = 0;
+    //总消费钱数
+    this->consumption = 0;
+    //当天消费钱数
+    this->today_money = 0;
 }
 
 

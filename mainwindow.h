@@ -9,11 +9,10 @@
 #include "add_money.h"
 #include "logger.h"
 #include "canteen.h"
-#include "consume.h"
 #include "operation.h"
 #include "analyser.h"
-
-
+#include "get_password.h"
+#include "stu_money.h"
 // QT headers
 #include <QMainWindow>
 #include <QPushButton>
@@ -72,8 +71,6 @@ private slots:
 
     void on_add_money_triggered();
 
-    void on_consume_triggered();
-
     void on_operate_all_triggered();
 
     void on_to_begin_clicked();
@@ -92,13 +89,21 @@ private slots:
 
     void on_recover_account_triggered();
 
-    void on_pushButton_clicked();
-
     void on_regex_ID_search_triggered();
 
     void on_regex_name_search_triggered();
 
     void on_summary_triggered();
+
+    void on_time_set_clicked();
+
+    void on_clear_clicked();
+
+    void on_consume_clicked();
+
+    void reflesh_time();
+
+    void on_stu_money_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -115,5 +120,7 @@ private:
     Operation *get_consume_operation(std::string, int);
     void insert_record(unsigned int ,record *);
     void execute(Operation *);
+    bool is_pass(Person *owner, std::string now_time, int money);
+
 };
 #endif // MAINWINDOW_H

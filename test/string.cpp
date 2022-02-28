@@ -17,8 +17,11 @@ bool cmp(std::string str1, std::string str2)
 
 int main()
 {   
-    std::string str1 = "2021092307001588";
-    std::string str2 = "2021092307001464";
-    cout << (str1 < str2) << endl;
-    cout << cmp("2021092307001588", "2021092307001464") << endl;
+    // std::string str1 = "2021092307001588";
+    // std::string str2 = "2021092307001464";
+    // cout << (str1 < str2) << endl;
+    // cout << cmp("2021092307001588", "2021092307001464") << endl;
+    std::vector<std::string> str_list = {"07", "09", "11", "13", "17", "19"};
+    // std::string now = "2021092307001588";
+    cout << str_list[0];
 }

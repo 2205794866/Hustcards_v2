@@ -14,8 +14,8 @@ SOURCES += \
     canteen.cpp \
     card.cpp \
     cardmanager.cpp \
-    consume.cpp \
     fail.cpp \
+    get_password.cpp \
     logger.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -26,6 +26,7 @@ SOURCES += \
     search_result.cpp \
     search_stu.cpp \
     stu_info.cpp \
+    stu_money.cpp \
     succeed.cpp \
     time_set.cpp
 
@@ -35,8 +36,8 @@ HEADERS += \
     canteen.h \
     card.h \
     cardmanager.h \
-    consume.h \
     fail.h \
+    get_password.h \
     logger.h \
     mainwindow.h \
     new_stu.h \
@@ -47,19 +48,21 @@ HEADERS += \
     search_stu.h \
     std.h \
     stu_info.h \
+    stu_money.h \
     succeed.h \
     time_set.h
 
 FORMS += \
     add_money.ui \
-    consume.ui \
     fail.ui \
+    get_password.ui \
     mainwindow.ui \
     new_stu.ui \
     regex_search.ui \
     search_result.ui \
     search_stu.ui \
     stu_info.ui \
+    stu_money.ui \
     succeed.ui \
     time_set.ui
 

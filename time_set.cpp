@@ -11,7 +11,6 @@ time_set::time_set(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("设置时间");
 
-
     std::string tm = logger.time;
     int ff = std::stoi(tm.substr(14, 2));
     tm = tm.substr(0, 14);

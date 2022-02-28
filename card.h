@@ -22,6 +22,7 @@ public:
     bool remove_lost();
     //获取卡号
     std::string get_card_ID();
+    std::string get_password();
     //获取是否有效
     bool is_valid();
     

@@ -17,6 +17,9 @@ public:
     int card_nums;
     //累积消费金额
     int consumption;
+    //当天消费金额
+    int today_money;
+
     std::vector<struct _record *> record_list;
     // 新建账户
     Person(std::string stu_ID, std::string name);

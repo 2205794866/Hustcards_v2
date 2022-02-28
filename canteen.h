@@ -24,10 +24,22 @@ class canteen
 {
 private:
     CardManager *CM;
+    void modify_canteen(record *one);
+    void modify_account(Person *, record *);
+
+
+
 public:
     std::deque<record *>recordlist[100];
     canteen(CardManager *CM);
+    //总消费记录数
     std::vector<int> nums;
+    //当天消费金额
+    std::vector<int> today_money;
+    //当天消费次数
+    std::vector<int> today_nums;
+
+
     bool consume(record *);
 };
 

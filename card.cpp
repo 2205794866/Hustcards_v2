@@ -45,3 +45,8 @@ bool Card::remove_lost()
     //否则则解挂失败
     return false;
 }
+
+std::string Card::get_password()
+{
+    return password;
+}
