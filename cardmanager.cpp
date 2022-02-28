@@ -81,6 +81,7 @@ bool CardManager::issue_card(std::string tm)
                 one->tail->next = new_card;
                 one->tail = new_card;
                 one->valid_one = new_card;
+                one->card_nums ++;
                 //写入日志
                 logger.write_operation_record(new operation_record(tm, one->get_name(), one->get_stu_ID(), "发卡", true));
             }
@@ -118,19 +119,32 @@ bool CardManager::reissue_card(std::string tm, std::string stu_ID)
         }
         else
         {
-            if (one->valid_one != nullptr)
-                one->valid_one->report_lost();
-            //获取卡号
-            std::string card_ID = get_card_ID();
-            //新建卡
-            Card *new_card = new Card(one, card_ID, "8888");
-            //加入管理
-            this->cardlist.push_back(new_card);
-            this->Map_CIDtoCard.insert(std::make_pair(card_ID, new_card));
-            //对账户设置
-            one->tail->next = new_card;
-            one->tail = new_card;
-            one->valid_one = new_card;
+            // if(one->card_nums == 100)
+            // {
+                // flag = false;
+                // err_msg = "补卡超过上限";
+                // one->card_nums --;
+                // Card *temp = one->head->next;
+                // one->head->next = one->head->next->next;
+                // delete temp;
+            // }
+            // else
+            // {
+                if (one->valid_one != nullptr)
+                    one->valid_one->report_lost();
+                //获取卡号
+                std::string card_ID = get_card_ID();
+                //新建卡
+                Card *new_card = new Card(one, card_ID, "8888");
+                //加入管理
+                this->cardlist.push_back(new_card);
+                this->Map_CIDtoCard.insert(std::make_pair(card_ID, new_card));
+                //对账户设置
+                one->tail->next = new_card;
+                one->tail = new_card;
+                one->valid_one = new_card;
+                one->card_nums ++;
+            // }
         }
         logger.write_operation_record(new operation_record(tm, one->get_name(), one->get_stu_ID(), "补卡", flag, err_msg));
         return flag;

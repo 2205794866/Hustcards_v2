@@ -3,6 +3,7 @@
 #include "std.h"
 #include <card.h>
 
+struct _record;
 class Person
 {
 public:
@@ -12,8 +13,11 @@ public:
     // std::vector <Card *> *cardlist;
     Card *head;
     Card *tail;
-    int card_size;
-
+    //卡数
+    int card_nums;
+    //累积消费金额
+    int consumption;
+    std::vector<struct _record *> record_list;
     // 新建账户
     Person(std::string stu_ID, std::string name);
     //获取姓名
@@ -41,6 +45,8 @@ private:
     bool valid;
     //余额
     int money;
+
+
 };
 
 #endif // PERSON_H

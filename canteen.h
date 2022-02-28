@@ -27,6 +27,7 @@ private:
 public:
     std::deque<record *>recordlist[100];
     canteen(CardManager *CM);
+    std::vector<int> nums;
     bool consume(record *);
 };
 

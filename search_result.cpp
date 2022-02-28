@@ -46,7 +46,7 @@ search_result::search_result(CardManager *CM, std::string str, int func_num,QWid
                 if(match_1(str, one->get_name()) == true)
                 {
                     QList<QStandardItem*> list;
-                    list.append(new QStandardItem(QString::asprintf("%d", nums++)));
+                    list.append(new QStandardItem(QString::asprintf("%d", ++nums)));
                     list.append(new QStandardItem(QString::fromStdString(one->get_stu_ID())));
                     list.append(new QStandardItem(QString::fromStdString(one->get_name())));
                     stu_model->appendRow(list);
@@ -87,9 +87,9 @@ bool search_result::match_1(std::string str, std::string name)
     for(auto c:str)
     {
         if(c == '?')
-            pattern += "[^\\x00-\\xff]?";
+            pattern += "([^\\w]{3})";
         else if(c == '*')
-            pattern += "[^\\x00-\\xff]*";
+            pattern += "([^\\w]{0,})";
         else
         {
             pattern += c;

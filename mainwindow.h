@@ -11,7 +11,7 @@
 #include "canteen.h"
 #include "consume.h"
 #include "operation.h"
-
+#include "analyser.h"
 
 
 // QT headers
@@ -98,10 +98,13 @@ private slots:
 
     void on_regex_name_search_triggered();
 
+    void on_summary_triggered();
+
 private:
     Ui::MainWindow *ui;
     CardManager *CM;
     canteen *CT;
+    Analyser *AL;
     //QTableView model
     QStandardItemModel *stu_model;
     QStandardItemModel *record_model;

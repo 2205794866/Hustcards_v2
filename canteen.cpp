@@ -3,6 +3,7 @@
 canteen::canteen(CardManager *CM)
 {
     this->CM = CM;
+    nums.assign(100, 0);
 }
 
 bool canteen::consume(record *one)
@@ -46,6 +47,8 @@ bool canteen::consume(record *one)
                     this->recordlist[one->canteen_ID].pop_front();
                 }
                 this->recordlist[one->canteen_ID].push_back(one);
+                owner->record_list.push_back(one);
+                this->nums[one->canteen_ID] ++;
             }
             else
             {

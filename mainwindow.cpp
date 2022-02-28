@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 Logger logger;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     //初始化
     this->CM = new CardManager;
     this->CT = new canteen(this->CM);
+    this->AL = new Analyser(this->CM, this->CT);
     //界面信息
     //model
     stu_model = new QStandardItemModel;
@@ -66,7 +69,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->all_menu->addAction(ui->Input_all);
     ui->all_menu->addAction(ui->issue_all_card);
     ui->all_menu->addAction(ui->operate_all);
-    //日志操作
+    //分析操作
+    ui->al_menu->addAction(ui->summary);
 }
 
 MainWindow::~MainWindow()
@@ -388,6 +392,7 @@ void MainWindow::on_operate_all_triggered()
                 canteen_ID = std::stoi(str.substr(0, str.find(",")));
                 nums = std::stoi(str.substr(str.find(",") +1, str.find(";") - str.find(",")));
                 this->CT->recordlist[canteen_ID].assign(nums, nullptr);
+                this->CT->nums[canteen_ID] = nums;
 //                std::cout << canteen_ID << ":" << this->CT->recordlist[canteen_ID].size() << std::endl;
             }
         }
@@ -405,7 +410,7 @@ void MainWindow::on_operate_all_triggered()
 
     str = buff;
     str.pop_back();
-    std::cout << str << std::endl;
+    // std::cout << str << std::endl;
     if(str == "XF")
     {
         int canteen_ID = 0;
@@ -464,7 +469,36 @@ void MainWindow::on_operate_all_triggered()
     std::cout << "merged takes:" << (double)(finish4 - start4) / CLOCKS_PER_SEC << std::endl;
     clock_t start5 = clock();
     for(auto one: ans)
+    {//多路归并
+    clock_t start4 = clock();
+    ans.reserve(2000000);
+    std::priority_queue<Operation *, std::vector<Operation *>, cmp1> que;
+    for(int i = 0; i<100; i++)
     {
+        if(!data[i].empty())
+        {
+            que.push(data[i].front());
+            data[i].pop();
+        }
+    }
+    while(!que.empty())
+    {
+        Operation *one = que.top();
+        que.pop();
+        int canteen_ID = one->canteen_ID;
+        ans.emplace_back(one);
+        if(!data[canteen_ID].empty())
+        {
+            que.push(data[canteen_ID].front());
+            data[canteen_ID].pop();
+        }
+    }
+    //clear
+    for(int i = 0; i<100; i++)
+        std::queue<Operation *>().swap(data[i]);
+
+    clock_t finish4 = clock();
+    std::cout << "merged takes:" << (double)(finish4 - start4) / CLOCKS_PER_SEC << std::endl;
         execute(one);
         delete one;
     }
@@ -511,8 +545,10 @@ void MainWindow::on_canteen_ID_valueChanged(int arg1)
     this->record_model->removeRows(0, record_model->rowCount());
     int canteen_ID = arg1;
     unsigned int nums = CT->recordlist[canteen_ID].size();
-    QString str = QString::asprintf("%d号窗口消费记录数为%d", canteen_ID, nums);
+    QString str = QString::asprintf("%d号窗口有效消费记录数为%d", canteen_ID, nums);
+    QString str1 = QString::asprintf("总消费记录数:%d", CT->nums[canteen_ID]);
     ui->nums->setText(str);
+    ui->total_nums->setText(str1);
     for(unsigned int i = 0; i< nums; i++)
     {
         record *one = CT->recordlist[canteen_ID][i];
@@ -552,5 +588,11 @@ void MainWindow::on_regex_name_search_triggered()
 {
     regex_search *ui_regex_search = new regex_search(this->CM, 1, this);
     ui_regex_search->show();
+}
+
+
+void MainWindow::on_summary_triggered()
+{
+    this->AL->summary();
 }
 

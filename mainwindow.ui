@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -138,7 +138,7 @@
            <item>
             <widget class="QLabel" name="nums">
              <property name="text">
-              <string>消费记录数</string>
+              <string>有效消费记录数</string>
              </property>
             </widget>
            </item>
@@ -154,6 +154,13 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="total_nums">
+             <property name="text">
+              <string>总消费记录数:60000</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="to_begin">
@@ -254,22 +261,22 @@
      <string>批量操作</string>
     </property>
    </widget>
-   <widget class="QMenu" name="log_menu">
-    <property name="title">
-     <string>日志</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="canteen_menu">
     <property name="title">
      <string>食堂</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="al_menu">
+    <property name="title">
+     <string>分析</string>
     </property>
    </widget>
    <addaction name="search_menu"/>
    <addaction name="stu_menu"/>
    <addaction name="card_menu"/>
    <addaction name="canteen_menu"/>
-   <addaction name="log_menu"/>
    <addaction name="all_menu"/>
+   <addaction name="al_menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="search_person">
@@ -343,6 +350,14 @@
   <action name="regex_name_search">
    <property name="text">
     <string>姓名模糊查找学生</string>
+   </property>
+  </action>
+  <action name="summary">
+   <property name="text">
+    <string>汇总</string>
+   </property>
+   <property name="toolTip">
+    <string>汇总消费数据</string>
    </property>
   </action>
  </widget>

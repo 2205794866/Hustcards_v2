@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     add_money.cpp \
+    analyser.cpp \
     canteen.cpp \
     card.cpp \
     cardmanager.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 
 HEADERS += \
     add_money.h \
+    analyser.h \
     canteen.h \
     card.h \
     cardmanager.h \

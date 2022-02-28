@@ -13,6 +13,8 @@ Person::Person(std::string stu_ID, std::string name)
     valid_one = nullptr;
     //初始为有效
     valid = true;
+    //卡数为0
+    card_nums = 0;
 }
 
 
