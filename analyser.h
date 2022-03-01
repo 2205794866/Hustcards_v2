@@ -56,7 +56,6 @@ public:
     bool pop()
     // pop 出队列
     {
-
         if (empty() == true)
             // 若空返回false
             return false;

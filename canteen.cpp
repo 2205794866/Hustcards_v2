@@ -131,7 +131,6 @@ bool canteen::consume(record *one)
                 this->recordlist[one->canteen_ID].push_back(one);
                 // 账户消费记录添加
                 owner->record_list.push_back(one);
-                
             }
             else
             {

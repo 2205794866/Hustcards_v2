@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->al_menu->addAction(ui->summary);
     ui->al_menu->addAction(ui->stu_money);
     ui->al_menu->addAction(ui->get_friends);
+    ui->al_menu->addAction(ui->data_check);
 }
 
 MainWindow::~MainWindow()
@@ -727,5 +728,42 @@ void MainWindow::on_all_triggered()
     on_issue_all_card_triggered();
 
     on_operate_all_triggered();
+}
+
+
+void MainWindow::on_data_check_triggered()
+{
+
+    //定义文件对话框类
+    QFileDialog *fileDialog = new QFileDialog(this);
+    //定义文件对话框标题
+    fileDialog->setWindowTitle(QStringLiteral("选中文件"));
+    //设置默认文件路径
+    fileDialog->setDirectory("D:\\Study\\Project\\Hustcards_v2");
+    //设置文件过滤器
+    fileDialog->setNameFilter(tr("File(*.txt)"));
+
+
+    std::string file_name;
+    if (fileDialog->exec())
+    {
+        file_name = fileDialog->selectedFiles().begin()->toStdString();
+        if(file_name == "")
+            return;
+    }
+    clock_t start = clock();
+    bool flag = this->AL->data_detect(file_name);
+    if(flag == true)
+    {
+        succeed *ui_succeed = new succeed(this);
+        ui_succeed->exec();
+    }
+    else
+    {
+        fail *ui_fail = new fail(this);
+        ui_fail->exec();
+    }
+
+    std::cout << "data detect takes:"<< (double)(clock() - start)/CLOCKS_PER_SEC << std::endl;
 }
 
