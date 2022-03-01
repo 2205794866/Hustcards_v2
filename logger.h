@@ -49,9 +49,9 @@ typedef struct _consume_record
         check_code = 0;
         for (int i = 0; i < 30; i++)
         {
-            check_code += (buff[i] - '0');
+            check_code += (buff[i] - '0') * check_method[i%17];
         }
-        check_code %= 10;
+        check_code %= 100;
     }
 } consume_record;
 
@@ -84,6 +84,8 @@ private:
     int file_check;
     //时间
     std::string time;
+    //数量
+    int nums;
 };
 
 #endif // LOGGER_H

@@ -14,6 +14,7 @@
 #include <QMenuBar>
 #include <QToolBar>
 #include <QProgressDialog>
+#include <QFileDialog>
 
 // dialog headers
 #include "succeed.h"
@@ -112,6 +113,8 @@ private slots:
     void on_get_friends_triggered();
 
     void on_all_triggered();
+
+    void on_data_check_triggered();
 
 private:
     Ui::MainWindow *ui;

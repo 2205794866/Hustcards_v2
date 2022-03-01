@@ -7,6 +7,8 @@ Logger::Logger()
 
     // 初始化时间
     this->time = "2021090100000000";
+    // 日志数
+    nums = 0;
     // 初始化文件校验码
     file_check = 0;
     // 打开文件
@@ -82,9 +84,11 @@ bool Logger::write_consume_record(consume_record *one)
     char info[140];
     // 修改文件校验码
     file_check += one->check_code;
+    file_check = file_check * 101 % 100;
     // 写入日志
-    sprintf(info, "%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s 数据校验码:%d 文件校验码:%d\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money / 100, one->money % 100, one->left / 100, one->left % 100, flag.c_str(), one->err_msg.c_str(), one->check_code, file_check * 11 % 10);
+    sprintf(info, "%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s 数据校验码:%d 文件校验码:%d\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money / 100, one->money % 100, one->left / 100, one->left % 100, flag.c_str(), one->err_msg.c_str(), one->check_code, file_check);
     fputs(info, fp2);
+    nums++;
     return true;
 }
 
@@ -93,6 +97,9 @@ Logger::~Logger()
     // afile.close();
     // bfile.close();
 
+    char end_check[100];
+    sprintf(end_check, "end 校验码:%d", nums * file_check %100);
+    fputs(end_check, fp2);
     //关闭文件
     fclose(fp1);
     fclose(fp2);

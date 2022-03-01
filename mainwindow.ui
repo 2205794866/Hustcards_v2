@@ -654,6 +654,11 @@
     <string>批量开户发卡操作</string>
    </property>
   </action>
+  <action name="data_check">
+   <property name="text">
+    <string>日志文件校验</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
