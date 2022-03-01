@@ -21,8 +21,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>530</y>
+     <x>400</x>
+     <y>550</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -79,28 +79,30 @@
     </item>
    </layout>
   </widget>
-  <widget class="QTableView" name="stu_table">
+  <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>170</y>
+     <y>150</y>
      <width>591</width>
-     <height>321</height>
+     <height>331</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QLabel" name="tips">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>130</y>
-     <width>151</width>
-     <height>21</height>
-    </rect>
+   <property name="title">
+    <string/>
    </property>
-   <property name="text">
-    <string>xx(xx)共有朋友x人</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="tips">
+      <property name="text">
+       <string>xx(xx)共有朋友x人</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableView" name="stu_table"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

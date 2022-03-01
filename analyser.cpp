@@ -144,7 +144,7 @@ std::vector<std::string> Analyser::get_friends(std::string stu_ID)
             int j = 0, canteen_ID = total[i]->canteen_ID;
 
             // 查看前后30条记录
-            while (j <= 30)
+            while (j <= 50)
             {
                 // 窗口号 +-2
                 if (i - j > 0 && abs(total[i - j]->canteen_ID - canteen_ID) < 3)
@@ -177,6 +177,7 @@ std::vector<std::string> Analyser::get_friends(std::string stu_ID)
     }
     // debug
     // std::cout << get_counts.count("2020030015") << std::endl;
+    std::cout << get_counts.size() << std::endl;
     std::cout << "get_friends takes: " << (double)(clock() - start) / CLOCKS_PER_SEC << std::endl;
     ;
     return friends;
