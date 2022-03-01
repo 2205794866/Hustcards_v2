@@ -7,9 +7,9 @@
 #include "std.h"
 #include "cardmanager.h"
 
-
-namespace Ui {
-class stu_money;
+namespace Ui
+{
+    class stu_money;
 }
 
 class stu_money : public QDialog
@@ -27,7 +27,6 @@ private slots:
 private:
     Ui::stu_money *ui;
     CardManager *CM;
-
 };
 
 #endif // STU_MONEY_H

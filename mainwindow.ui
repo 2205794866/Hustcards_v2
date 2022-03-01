@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -357,7 +357,7 @@
        <widget class="QLabel" name="label_6">
         <property name="geometry">
          <rect>
-          <x>497</x>
+          <x>540</x>
           <y>80</y>
           <width>71</width>
           <height>30</height>
@@ -370,7 +370,7 @@
        <widget class="QSpinBox" name="now_ff">
         <property name="geometry">
          <rect>
-          <x>437</x>
+          <x>480</x>
           <y>80</y>
           <width>53</width>
           <height>30</height>
@@ -385,7 +385,7 @@
          <rect>
           <x>230</x>
           <y>80</y>
-          <width>200</width>
+          <width>241</width>
           <height>30</height>
          </rect>
         </property>
@@ -644,6 +644,14 @@
   <action name="get_friends">
    <property name="text">
     <string>寻找好友</string>
+   </property>
+  </action>
+  <action name="all">
+   <property name="text">
+    <string>批量处理</string>
+   </property>
+   <property name="toolTip">
+    <string>批量开户发卡操作</string>
    </property>
   </action>
  </widget>

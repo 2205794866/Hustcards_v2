@@ -39,6 +39,7 @@ public:
     bool add_money(int x);
     //消费
     bool consume(int x);
+
 private:
     //姓名
     std::string name;
@@ -48,8 +49,6 @@ private:
     bool valid;
     //余额
     int money;
-
-
 };
 
 #endif // PERSON_H

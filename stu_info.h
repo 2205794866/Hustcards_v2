@@ -9,9 +9,9 @@
 #include "succeed.h"
 #include "fail.h"
 
-
-namespace Ui {
-class stu_info;
+namespace Ui
+{
+    class stu_info;
 }
 
 class stu_info : public QDialog
@@ -19,7 +19,7 @@ class stu_info : public QDialog
     Q_OBJECT
 
 public:
-    explicit stu_info(CardManager *CM, int func_num, std::string stu_ID,QWidget *parent = nullptr);
+    explicit stu_info(CardManager *CM, int func_num, std::string stu_ID, QWidget *parent = nullptr);
     ~stu_info();
 
 private slots:

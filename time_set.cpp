@@ -10,11 +10,12 @@ time_set::time_set(QWidget *parent) :
     //
     ui->setupUi(this);
     this->setWindowTitle("设置时间");
-
-    std::string tm = logger.time;
+    // 显示当前时间
+    std::string tm = logger.get_time();
     int ff = std::stoi(tm.substr(14, 2));
     tm = tm.substr(0, 14);
     QDateTime Qtm = QDateTime::fromString(QString::fromStdString(tm), "yyyyMMddhhmmss");
+    // 
     ui->curren_time->setDateTime(Qtm);
     ui->cureent_ff->setValue(ff);
     ui->now_time->setDateTime(Qtm);
@@ -28,18 +29,19 @@ time_set::~time_set()
 
 void time_set::on_buttonBox_accepted()
 {
+    // 获取新时间
     std::string tm = ui->now_time->dateTime().toString("yyyyMMddhhmmss").toStdString();
-    tm += std::to_string(ui->now_ff->value());
-    if(tm < logger.time)
+    tm += QString::asprintf("%02d", ui->now_ff->value()).toStdString();
+    // 设置时间
+    if(logger.set_time(tm) == true)
     {
-        fail *ui_fail = new fail(this);
-        ui_fail->show();
+        succeed *ui_succeed = new succeed(this);
+        ui_succeed->show();
     }
     else
     {
-        logger.time = tm;
-        succeed *ui_succeed = new succeed(this);
-        ui_succeed->show();
+        fail *ui_fail = new fail(this);
+        ui_fail->show();
     }
 }
 

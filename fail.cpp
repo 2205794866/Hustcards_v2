@@ -1,9 +1,8 @@
 #include "fail.h"
 #include "ui_fail.h"
 
-fail::fail(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::fail)
+fail::fail(QWidget *parent) : QDialog(parent),
+                              ui(new Ui::fail)
 {
     ui->setupUi(this);
 }

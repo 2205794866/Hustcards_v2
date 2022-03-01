@@ -1,19 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "succeed.h"
-#include "stu_info.h"
-#include "fail.h"
-#include "search_stu.h"
-#include "new_stu.h"
-#include "add_money.h"
-#include "logger.h"
-#include "canteen.h"
-#include "operation.h"
-#include "analyser.h"
-#include "get_password.h"
-#include "stu_money.h"
-#include "get_friends.h"
+// std headers
+#include "std.h"
+
 // QT headers
 #include <QMainWindow>
 #include <QPushButton>
@@ -23,18 +13,34 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QToolBar>
+#include <QProgressDialog>
 
-
-
+// dialog headers
+#include "succeed.h"
+#include "fail.h"
+#include "stu_info.h"
+#include "search_stu.h"
+#include "new_stu.h"
+#include "add_money.h"
 #include "regex_search.h"
 #include "time_set.h"
-#include "std.h"
+#include "get_password.h"
+#include "stu_money.h"
+#include "get_friends.h"
+
+// my headers
 #include "cardmanager.h"
+#include "logger.h"
+#include "canteen.h"
+#include "operation.h"
+#include "analyser.h"
 
 QT_BEGIN_NAMESPACE
 
-
-namespace Ui { class MainWindow; }
+namespace Ui
+{
+    class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -47,8 +53,6 @@ public:
 
 private slots:
 
-
-
     void on_show_data_clicked();
 
     void on_Input_all_triggered();
@@ -56,7 +60,6 @@ private slots:
     void on_clear_data_clicked();
 
     void on_stus_info_doubleClicked(const QModelIndex &index);
-
 
     void on_open_account_triggered();
 
@@ -108,22 +111,27 @@ private slots:
 
     void on_get_friends_triggered();
 
+    void on_all_triggered();
+
 private:
     Ui::MainWindow *ui;
+    // CM,CT,AL
     CardManager *CM;
     canteen *CT;
     Analyser *AL;
-    //QTableView model
+
+    // QTableView model
     QStandardItemModel *stu_model;
     QStandardItemModel *record_model;
 
-    //func
+    // func
     void insert_data(unsigned int row_num, std::string stu_ID, std::string name, int money);
-    Operation *get_operation(std::string);
-    Operation *get_consume_operation(std::string, int);
-    void insert_record(unsigned int ,record *);
+    void insert_record(unsigned int, record *);
     void execute(Operation *);
     bool is_pass(Person *owner, std::string now_time, int money);
-
+    
+    Operation *get_operation(std::string);
+    Operation *get_consume_operation(std::string, int);
+    
 };
 #endif // MAINWINDOW_H

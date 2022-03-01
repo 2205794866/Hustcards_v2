@@ -3,8 +3,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class get_password;
+namespace Ui
+{
+    class get_password;
 }
 
 class get_password : public QDialog
@@ -12,7 +13,7 @@ class get_password : public QDialog
     Q_OBJECT
 
 public:
-    explicit get_password(std::string &pass_word,QWidget *parent = nullptr);
+    explicit get_password(std::string &pass_word, QWidget *parent = nullptr);
     ~get_password();
 
 private slots:
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::get_password *ui;
+    // 密码引用
     std::string &pass_word;
 };
 

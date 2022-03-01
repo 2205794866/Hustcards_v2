@@ -8,10 +8,9 @@
 #include "cardmanager.h"
 #include "std.h"
 
-
-
-namespace Ui {
-class search_result;
+namespace Ui
+{
+    class search_result;
 }
 
 class search_result : public QDialog
@@ -33,8 +32,8 @@ private:
     std::string str;
     int func_num;
 
-    bool match_0(std::string , std::string);
-    bool match_1(std::string,  std::string);
+    bool match_0(std::string, std::string);
+    bool match_1(std::string, std::string);
 };
 
 #endif // SEARCH_RESULT_H

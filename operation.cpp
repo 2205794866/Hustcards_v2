@@ -34,6 +34,3 @@ Operation::Operation(std::string tm, int canteen_ID, std::string card_ID, int mo
     this->money = money;
     this->func_num = func_num;
 }
-
-
-

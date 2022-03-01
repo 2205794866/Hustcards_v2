@@ -21,7 +21,6 @@ Person::Person(std::string stu_ID, std::string name)
     this->today_money = 0;
 }
 
-
 std::string Person::get_name()
 //返回姓名
 {
@@ -49,7 +48,7 @@ bool Person::is_valid()
 bool Person::cancel_account()
 //销户
 {
-    if(this->valid == true)
+    if (this->valid == true)
     {
         this->valid = false;
         return true;
@@ -61,7 +60,7 @@ bool Person::cancel_account()
 bool Person::recover_account()
 //恢复账户
 {
-    if(this->valid == false)
+    if (this->valid == false)
     {
         this->valid = true;
         return true;
@@ -73,8 +72,8 @@ bool Person::recover_account()
 bool Person::add_money(int x)
 //充值
 {
-    int sum = this->money + x ;
-    if(sum < 0 || sum > 99999)
+    int sum = this->money + x;
+    if (sum < 0 || sum > 99999)
     {
         return false;
     }
@@ -89,7 +88,7 @@ bool Person::consume(int x)
 //消费
 {
     int sum = this->money - x;
-    if(sum < 0 || sum > 99999)
+    if (sum < 0 || sum > 99999)
     {
         return false;
     }
@@ -99,4 +98,3 @@ bool Person::consume(int x)
         return true;
     }
 }
-

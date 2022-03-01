@@ -2,11 +2,9 @@
 #define CARD_H
 #include "std.h"
 
-
 class Person;
 
-
-
+// Card类
 class Card
 {
 public:
@@ -22,10 +20,13 @@ public:
     bool remove_lost();
     //获取卡号
     std::string get_card_ID();
+    // 获取密码
     std::string get_password();
+    // 设置密码
+    bool set_password(std::string);
     //获取是否有效
     bool is_valid();
-    
+
 private:
     //密码
     std::string password;
@@ -35,8 +36,6 @@ private:
     std::string card_ID;
     //是否有效
     bool valid;
-    
-
 };
 
 #endif // CARD_H
