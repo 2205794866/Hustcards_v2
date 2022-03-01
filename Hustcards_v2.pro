@@ -15,6 +15,7 @@ SOURCES += \
     card.cpp \
     cardmanager.cpp \
     fail.cpp \
+    get_friends.cpp \
     get_password.cpp \
     logger.cpp \
     main.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     card.h \
     cardmanager.h \
     fail.h \
+    get_friends.h \
     get_password.h \
     logger.h \
     mainwindow.h \
@@ -55,6 +57,7 @@ HEADERS += \
 FORMS += \
     add_money.ui \
     fail.ui \
+    get_friends.ui \
     get_password.ui \
     mainwindow.ui \
     new_stu.ui \

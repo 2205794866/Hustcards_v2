@@ -15,6 +15,7 @@ typedef struct _record
         this->canteen_ID = canteen_ID;
         this->card_ID = card_ID;
         this->money = money;
+        
     }
 } record;
 

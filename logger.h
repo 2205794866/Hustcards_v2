@@ -22,7 +22,7 @@ typedef  struct _operation_record
 typedef  struct _consume_record
 {
     std::string time, card_ID, err_msg;
-    int canteen_ID, money, left;
+    int canteen_ID, money, left, check_code;
     bool flag;
     _consume_record(std::string time, std::string card_ID,int canteen_ID, int money,int left, bool flag, std::string err_msg = "")
     {
@@ -33,6 +33,18 @@ typedef  struct _consume_record
         this->flag = flag;
         this->err_msg = err_msg;
         this->left = left;
+
+        //获取校验码
+         char buff[31];
+        // std::vector<int> check_method = {7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};
+        //time 16 canteen_ID 2 card_ID 7 money 5
+         sprintf(buff, "%s%02d%s%05d", time.c_str(), canteen_ID, card_ID.c_str(), money);
+         check_code = 0;
+         for(int i = 0; i<30; i++)
+         {
+             check_code += (buff[i] - '0');
+         }
+         check_code %= 10;
     }
 } consume_record;
 
@@ -45,6 +57,7 @@ public:
     bool write_consume_record(consume_record *);
     // std::deque<operation_record*> operation_list;
     // std::deque<consume_record *> consume_list; 
+    
     std::string time;
     ~Logger();
 private:

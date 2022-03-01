@@ -34,9 +34,11 @@ bool Logger::write_consume_record(consume_record *one)
     // sprintf(money, "%d.%02d", one->money / 100, one->money % 100);
     // sprintf(left, "%d.%02d", one->left / 100, one->left % 100);
     // sprintf(canteen_ID, "%2d", one->canteen_ID);
-//    bfile << one->time << " " << canteen_ID << " " << one->card_ID << " " << "消费:" << money << " 余额:" << left << " " << flag << " " << one->err_msg << std::endl;
+    // bfile << one->time << " " << canteen_ID << " " << one->card_ID << " " << "消费:" << money << " 余额:" << left << " " << flag << " " << one->err_msg << std::endl;
+    
+
     char info[120];
-    sprintf(info,"%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money/100, one->money%100, one->left/100, one->left%100, flag.c_str(), one->err_msg.c_str());
+    sprintf(info,"%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s %d\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money/100, one->money%100, one->left/100, one->left%100, flag.c_str(), one->err_msg.c_str(), one->check_code);
     // fwrite(info, strlen(info), 1, fp2);
     // fprintf(fp2, "%s %2d %s 消费:%d.%02d 余额%d.%02d %s %s\n", one->time.c_str(), one->canteen_ID, one->card_ID.c_str(), one->money/100, one->money%100, one->left/100, one->left%100, flag.c_str(), one->err_msg.c_str());
     fputs(info, fp2);

@@ -71,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     //分析操作
     ui->al_menu->addAction(ui->summary);
     ui->al_menu->addAction(ui->stu_money);
+    ui->al_menu->addAction(ui->get_friends);
 }
 
 MainWindow::~MainWindow()
@@ -714,5 +715,12 @@ void MainWindow::on_stu_money_triggered()
 {
     stu_money *ui_stu_money = new stu_money(this->CM, this);
     ui_stu_money->exec();
+}
+
+
+void MainWindow::on_get_friends_triggered()
+{
+    get_friends *ui_get_friends = new get_friends(this->AL,this->CM, this);
+    ui_get_friends->exec();
 }
 

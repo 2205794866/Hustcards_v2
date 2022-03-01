@@ -6,6 +6,7 @@ canteen::canteen(CardManager *CM)
     nums.assign(100, 0);
     today_money.assign(100, 0);
     today_nums.assign(100, 0);
+
 }
 
 void canteen::modify_canteen(record *one)

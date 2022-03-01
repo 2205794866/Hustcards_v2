@@ -120,7 +120,7 @@
                        </datetime>
                       </property>
                       <property name="currentSection">
-                       <enum>QDateTimeEdit::DaySection</enum>
+                       <enum>QDateTimeEdit::YearSection</enum>
                       </property>
                       <property name="displayFormat">
                        <string>yyyy/MM/dd HH:mm:ss</string>
@@ -639,6 +639,11 @@
   <action name="stu_money">
    <property name="text">
     <string>学生累计消费</string>
+   </property>
+  </action>
+  <action name="get_friends">
+   <property name="text">
+    <string>寻找好友</string>
    </property>
   </action>
  </widget>

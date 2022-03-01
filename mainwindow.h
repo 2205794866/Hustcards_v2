@@ -13,6 +13,7 @@
 #include "analyser.h"
 #include "get_password.h"
 #include "stu_money.h"
+#include "get_friends.h"
 // QT headers
 #include <QMainWindow>
 #include <QPushButton>
@@ -104,6 +105,8 @@ private slots:
     void reflesh_time();
 
     void on_stu_money_triggered();
+
+    void on_get_friends_triggered();
 
 private:
     Ui::MainWindow *ui;

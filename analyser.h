@@ -10,45 +10,16 @@ class my_queue
 {
     private:
         std::vector<record *> heap;
-
-        void build()
-        {
-            int len = heap.size();
-            record *temp;
-            for(int i = len/2 - 1; i >= 0; i--)
-            {
-                if((2*i+1) < len && cmp(heap[i], heap[2*i+1]) == true)
-                {
-                    temp = heap[i];
-                    heap[i] = heap[2 * i + 1];
-                    heap[2*i+1] = temp;
-                    if((2*(2*i+1)+1 < len && cmp(heap[2*i+1],heap[2*(2*i+1)+1]) == true) || (2*(2*i+1)+2 < len && cmp(heap[2*i+1],heap[2*(2*i+1)+2]) == true))
-                    {
-                        build();
-                    }
-                }
-                if((2*i+2) < len && cmp(heap[i], heap[2*i+2]) == true)
-                {
-                    temp = heap[i];
-                    heap[i] = heap[2*i+2];
-                    heap[2*i+2] = temp;
-                    if ((2*(2*i+2)+1 < len && cmp(heap[2*i+2], heap[2*(2*i+2)+1]) == true) || (2*(2*i+2)+2 < len && cmp( heap[2*i+2], heap[2*(2*i+2)+2]) == true))
-                    {
-                        build();
-                    }
-                }
-            }
-        }
     public:
         my_queue()
         {
 
         }
-
         bool cmp(record *a, record *b)
         {
             return a->time > b->time;
         }
+
         record* top()
         {
             if(!heap.empty())
@@ -59,22 +30,38 @@ class my_queue
 
         void push(record *one)
         {
-
+            if(empty() == true)
+            {
+                heap.push_back(one);
+                return;
+            }
             heap.push_back(one);
-            build();
+            unsigned int i;
+            for(i = heap.size() - 1; i > 0 && cmp(heap[(i-1)/2],one); i=(i-1)/2)
+                heap[i] = heap[(i-1)/2];
+            heap[i] = one;   
         }
 
         bool pop()
         {
-            if(heap.empty() == false)
+            if(empty() == true)
+                return false;
+            
+            record* last = heap.back();
+            heap.pop_back();
+            unsigned int child, i;
+            for(i = 0; i * 2 + 1<heap.size(); i = child)
             {
-                heap[0] = heap.back();
-                heap.pop_back();
-                build();
-                return true;
+                child = 2*i+1;
+                if(child+1 < heap.size() && cmp(heap[child], heap[child + 1]))
+                    child ++;
+                if(cmp(last,heap[child]))
+                    heap[i] = heap[child];
+                else
+                    break;
             }
-            else
-                return false;          
+            heap[i] = last;
+            return true;
         }
 
         bool empty()
@@ -91,15 +78,14 @@ class Analyser
 {
 public:
     Analyser(CardManager *CM, canteen *CT);
+
     //汇总食堂消费记录
     void summary();
-
+    std::vector<std::string> get_friends(std::string stu_ID);
 private:
     CardManager *CM;
     canteen *CT;
-
-    
-
+    std::vector<record *> total;
 };
 
 #endif // ANALYSER_H
