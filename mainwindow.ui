@@ -7,18 +7,33 @@
     <x>0</x>
     <y>0</y>
     <width>1063</width>
-    <height>710</height>
+    <height>725</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -37,13 +52,13 @@
           <property name="title">
            <string/>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,8">
            <item>
             <widget class="QGroupBox" name="groupBox">
              <property name="title">
               <string/>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,6">
+             <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,6">
               <item>
                <widget class="QGroupBox" name="groupBox_2">
                 <property name="title">
@@ -53,7 +68,7 @@
                  <item row="0" column="0">
                   <widget class="QPushButton" name="show_data">
                    <property name="text">
-                    <string>显示数据</string>
+                    <string>刷新数据</string>
                    </property>
                   </widget>
                  </item>
@@ -64,28 +79,96 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
-                  <widget class="QPushButton" name="pushButton">
-                   <property name="text">
-                    <string>设置时间</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QPushButton" name="pushButton_2">
-                   <property name="text">
-                    <string>PushButton</string>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
               </item>
               <item>
                <widget class="QGroupBox" name="info_group">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
                 <property name="title">
                  <string>统计信息</string>
                 </property>
+                <layout class="QVBoxLayout" name="verticalLayout_4">
+                 <item>
+                  <widget class="QGroupBox" name="groupBox_7">
+                   <property name="title">
+                    <string>当前时间</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_5">
+                    <item>
+                     <widget class="QDateTimeEdit" name="time">
+                      <property name="font">
+                       <font>
+                        <pointsize>9</pointsize>
+                       </font>
+                      </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
+                      </property>
+                      <property name="dateTime">
+                       <datetime>
+                        <hour>0</hour>
+                        <minute>0</minute>
+                        <second>0</second>
+                        <year>2021</year>
+                        <month>9</month>
+                        <day>1</day>
+                       </datetime>
+                      </property>
+                      <property name="currentSection">
+                       <enum>QDateTimeEdit::YearSection</enum>
+                      </property>
+                      <property name="displayFormat">
+                       <string>yyyy/MM/dd HH:mm:ss</string>
+                      </property>
+                      <property name="calendarPopup">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="account_num">
+                   <property name="text">
+                    <string>总账户数</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="valid_acc_num">
+                   <property name="text">
+                    <string>总有效账户数</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="card_num">
+                   <property name="text">
+                    <string>总卡数</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="valid_card_num">
+                   <property name="text">
+                    <string>总有效卡数</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="record_num">
+                   <property name="text">
+                    <string>总消费记录数</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -99,28 +182,229 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_3">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <attribute name="title">
+        <string>消费</string>
+       </attribute>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>80</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>当前时间:</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>190</y>
+          <width>351</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>窗口号</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="canteen_ID_cons">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>消费金额</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="money">
+           <property name="maximum">
+            <double>999.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
+           <property name="stepType">
+            <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>260</y>
+          <width>351</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>卡号</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="card_ID"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="consume">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>280</y>
+          <width>92</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>确认</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="clear">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>210</y>
+          <width>92</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>清空</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="time_set">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>130</y>
+          <width>92</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>设置时间</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>390</y>
+          <width>491</width>
+          <height>57</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLabel" name="tips">
+           <property name="text">
+            <string>X号窗口X年X月X日累计消费X笔，共计X元</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>80</y>
+          <width>71</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>百分秒</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="now_ff">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>80</y>
+          <width>53</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QDateTimeEdit" name="now_time">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>80</y>
+          <width>241</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy/M/d H:mm:ss</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>日志</string>
+        <string>消费记录</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="title">
-           <string>操作日志</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QTableView" name="operation_list"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
         <item>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="font">
@@ -129,14 +413,99 @@
            </font>
           </property>
           <property name="title">
-           <string>消费日志</string>
+           <string>消费记录</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QTableView" name="consume_list"/>
+            <widget class="QLabel" name="nums">
+             <property name="text">
+              <string>有效消费记录数</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="total_nums">
+             <property name="text">
+              <string>总消费记录数:60000</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="to_begin">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>|&lt;&lt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sub_one">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>&lt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="canteen_ID">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <number>99</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="add_one">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="to_end">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>&gt;&gt;|</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
+        </item>
+        <item>
+         <widget class="QTableView" name="record_list"/>
         </item>
        </layout>
       </widget>
@@ -150,7 +519,7 @@
      <x>0</x>
      <y>0</y>
      <width>1063</width>
-     <height>25</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="search_menu">
@@ -173,27 +542,27 @@
      <string>批量操作</string>
     </property>
    </widget>
-   <widget class="QMenu" name="log_menu">
-    <property name="title">
-     <string>日志</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="canteen_menu">
     <property name="title">
      <string>食堂</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="al_menu">
+    <property name="title">
+     <string>分析</string>
     </property>
    </widget>
    <addaction name="search_menu"/>
    <addaction name="stu_menu"/>
    <addaction name="card_menu"/>
    <addaction name="canteen_menu"/>
-   <addaction name="log_menu"/>
    <addaction name="all_menu"/>
+   <addaction name="al_menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="search_person">
    <property name="text">
-    <string>查找学生</string>
+    <string>学号查找学生</string>
    </property>
   </action>
   <action name="Input_all">
@@ -239,19 +608,55 @@
     <string>充值</string>
    </property>
   </action>
-  <action name="open_log">
-   <property name="text">
-    <string>载入日志</string>
-   </property>
-  </action>
-  <action name="consume">
-   <property name="text">
-    <string>消费</string>
-   </property>
-  </action>
   <action name="operate_all">
    <property name="text">
     <string>批量操作</string>
+   </property>
+  </action>
+  <action name="recover_account">
+   <property name="text">
+    <string>恢复账户</string>
+   </property>
+  </action>
+  <action name="regex_ID_search">
+   <property name="text">
+    <string>学号模糊查找学生</string>
+   </property>
+  </action>
+  <action name="regex_name_search">
+   <property name="text">
+    <string>姓名模糊查找学生</string>
+   </property>
+  </action>
+  <action name="summary">
+   <property name="text">
+    <string>汇总</string>
+   </property>
+   <property name="toolTip">
+    <string>汇总消费数据</string>
+   </property>
+  </action>
+  <action name="stu_money">
+   <property name="text">
+    <string>学生累计消费</string>
+   </property>
+  </action>
+  <action name="get_friends">
+   <property name="text">
+    <string>寻找好友</string>
+   </property>
+  </action>
+  <action name="all">
+   <property name="text">
+    <string>批量处理</string>
+   </property>
+   <property name="toolTip">
+    <string>批量开户发卡操作</string>
+   </property>
+  </action>
+  <action name="data_check">
+   <property name="text">
+    <string>日志文件校验</string>
    </property>
   </action>
  </widget>

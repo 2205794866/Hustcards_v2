@@ -3,13 +3,14 @@
 
 #include <QDialog>
 #include "std.h"
+#include "logger.h"
 #include "cardmanager.h"
 #include "succeed.h"
 #include "fail.h"
 
-
-namespace Ui {
-class add_money;
+namespace Ui
+{
+    class add_money;
 }
 
 class add_money : public QDialog
@@ -25,6 +26,8 @@ private slots:
 
 private:
     Ui::add_money *ui;
+
+    // CM
     CardManager *CM;
 };
 

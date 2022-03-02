@@ -7,8 +7,9 @@
 #include "fail.h"
 #include "cardmanager.h"
 
-namespace Ui {
-class new_stu;
+namespace Ui
+{
+    class new_stu;
 }
 
 class new_stu : public QDialog
