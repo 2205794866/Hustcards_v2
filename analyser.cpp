@@ -139,8 +139,8 @@ std::vector<std::string> Analyser::get_friends(std::string stu_ID)
         {
             // 获取窗口号
             int j = 0, canteen_ID = total[i]->canteen_ID;
-            // 查看前后50条记录
-            while (j <= 50)
+            // 查看前后70条记录
+            while (j <= 70)
             {
                 // 窗口号 +-2
                 if (i - j > 0 && abs(total[i - j]->canteen_ID - canteen_ID) < 3)
