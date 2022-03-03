@@ -171,7 +171,7 @@ std::vector<std::string> Analyser::get_friends(std::string stu_ID)
         }
     }
     // debug
-    // std::cout << get_counts.count("2020030015") << std::endl;
+    std::cout << get_counts.find("2020561678")->second << std::endl;
     std::cout << get_counts.size() << std::endl;
     std::cout << "get_friends takes: " << (double)(clock() - start) / CLOCKS_PER_SEC << std::endl;
     ;
