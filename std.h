@@ -11,5 +11,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <regex>
+#include <io.h>
+#include <direct.h>
 
 #endif // STD_H
