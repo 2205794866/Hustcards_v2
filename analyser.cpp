@@ -252,7 +252,10 @@ bool Analyser::data_detect(std::string file_name)
             nums++;
         }  
     }
-    std::cout << "err_lines "<< nums << std::endl;
+//    std::cout << "err_lines "<< nums << std::endl;
+    QMessageBox box;
+    box.setText(QString::asprintf("%d行产生错误", nums+1));
+    box.exec();
     fclose(fp);
     return false;
 }

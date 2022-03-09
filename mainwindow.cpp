@@ -755,13 +755,9 @@ void MainWindow::on_data_check_triggered()
     bool flag = this->AL->data_detect(file_name);
     if(flag == true)
     {
-        succeed *ui_succeed = new succeed(this);
-        ui_succeed->exec();
-    }
-    else
-    {
-        fail *ui_fail = new fail(this);
-        ui_fail->exec();
+        QMessageBox box(this);
+        box.setText("数据完整无误!");
+        box.exec();
     }
 
     std::cout << "data detect takes:"<< (double)(clock() - start)/CLOCKS_PER_SEC << std::endl;

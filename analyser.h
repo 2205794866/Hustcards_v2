@@ -4,7 +4,7 @@
 #include "cardmanager.h"
 #include "canteen.h"
 #include "logger.h"
-
+#include <QMessageBox>
 // 自写优先队列
 class my_queue
 {
